@@ -17,4 +17,8 @@ class LogOut extends React.Component {
     }
 }
 
-export default connect(null, { logOutUser })(LogOut);
+const mapDispatchToProps = dispatch => ({
+    logOutUser: () => dispatch(logOutUser())
+})
+
+export default connect(null, mapDispatchToProps)(LogOut);
