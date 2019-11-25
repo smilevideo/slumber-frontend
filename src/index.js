@@ -4,12 +4,14 @@ import './index.css';
 import App from './App';
 
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers/rootReducer';
 
-
-let store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, compose(
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
+));
 
 ReactDOM.render(
     <Provider store={store}>
@@ -17,3 +19,4 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 );
+
