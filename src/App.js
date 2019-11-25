@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import { history } from './index.js';
 import { connect } from 'react-redux';
 import { getUser } from './actions/userActions';
 
@@ -16,14 +18,18 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router>
-        <Logo />
-        <NavBar />
-        <Route exact path='/' component={null} />
-        <Route exact path='/logout' component={LogOut} />
-        <Route exact path='/signup' component={SignUp} />
-        <Route exact path='/login' component={LogIn} />
-      </Router>
+      <ConnectedRouter history={history}>
+        <>
+          <Logo />
+          <NavBar />
+          <Switch>
+            <Route exact path='/' component={null} />
+            <Route exact path='/logout' component={LogOut} />
+            <Route exact path='/signup' component={SignUp} />
+            <Route exact path='/login' component={LogIn} />
+          </Switch>
+        </>
+      </ConnectedRouter>
     );
   }
 }

@@ -1,3 +1,5 @@
+import { push } from 'connected-react-router';
+
 const API_URL = 'http://localhost:3001';
 
 //sets user object in store
@@ -14,10 +16,12 @@ const failedSignUp = () => ({
     type: 'ERROR_SIGNUP_ERROR'
 })
 
-export const logOutUser = () => ({
-    type: 'LOGOUT_USER'
-})
-
+export const logOutUser = () => {
+    return (dispatch) => {
+        dispatch({ type: 'LOGOUT_USER' });
+        dispatch(push('/'));
+    }
+}
 
 export const createUser = (userParams) => {
     return (dispatch) => {
@@ -38,13 +42,13 @@ export const createUser = (userParams) => {
             })
             .then(r => r.json())
             .then(data => {
-                console.log(data);
                 if (data.error) {
                     dispatch(failedSignUp());
                 }
                 else {
                     localStorage.setItem('token', data.jwt)
                     dispatch(logIn(data.user));
+                    dispatch(push('/'));
                 }
             })
         )
@@ -70,13 +74,13 @@ export const logInUser = (userParams) => {
             })
             .then(r => r.json())
             .then(data => {
-                console.log(data);
                 if (data.error) {
                     dispatch(failedLogIn())
                 }
                 else {
                     localStorage.setItem('token', data.jwt);
                     dispatch(logIn(data.user));
+                    dispatch(push('/'));
                 }
             })
         )

@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { logOutUser } from '../actions/userActions';
 
-
 class LogOut extends React.Component {
     handleClick = () => {
         localStorage.removeItem('token');
@@ -18,10 +17,4 @@ class LogOut extends React.Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        logOutUser: () => dispatch(logOutUser())
-    }
-}
-
-export default connect(null, mapDispatchToProps)(LogOut);
+export default connect(null, { logOutUser })(LogOut);
