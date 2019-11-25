@@ -29,23 +29,37 @@ class SignUp extends React.Component {
             <form onSubmit={this.handleSubmit}>
                 <h2>Create an Account</h2>
 
-                <label>Username</label>
-                <input 
-                    name='username'
-                    placeholder='Username'
-                    value={this.state.username}
-                    onChange={this.handleChange}
-                /><br />
-
-                <label>Password</label>
-                <input
-                    name='password'
-                    placeholder='Password'
-                    value={this.state.password}
-                    onChange={this.handleChange}
-                /><br />
-
-                <input type='submit' /> 
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Username</th>
+                            <th>Password</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input 
+                                    name='username'
+                                    placeholder='Username'
+                                    value={this.state.username}
+                                    onChange={this.handleChange}
+                                /> 
+                            </td>
+                            <td>
+                                <input
+                                    name='password'
+                                    placeholder='Password'
+                                    value={this.state.password}
+                                    onChange={this.handleChange}
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type='submit' value='Create User'/> 
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </form>
         )
     }
