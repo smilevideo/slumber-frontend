@@ -7,7 +7,7 @@ const logIn = (userObj) => ({
 });
 
 export const logOutUser = () => ({
-    type: 'LOGOUT_USER' 
+    type: 'LOGOUT_USER'
 })
 
 export const createUser = (userParams) => {

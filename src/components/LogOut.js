@@ -4,15 +4,15 @@ import { logOutUser } from '../actions/userActions';
 
 
 class LogOut extends React.Component {
-    handleClick = (event) => {
+    handleClick = () => {
         localStorage.removeItem('token');
         this.props.logOutUser();
     }
 
     render() {
-        return (<React.Fragment>
-            {this.props.currentUser.username ? <button onClick={this.handleClick()}>Log Out?</button> : null}
-        </React.Fragment>)
+        return (<div>
+            {this.props.currentUser.username ? <button onClick={this.handleClick}>Log Out?</button> : null}
+        </div>)
     }
 }
 
