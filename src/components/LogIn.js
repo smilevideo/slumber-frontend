@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createUser } from '../actions/userActions';
+import { logInUser } from '../actions/userActions';
 
-class SignUp extends React.Component {
+class LogIn extends React.Component {
     constructor() {
         super()
 
@@ -21,13 +21,13 @@ class SignUp extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        this.props.createUser(this.state);
+        this.props.logInUser(this.state);
     }
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <h2>Create an Account</h2>
+                <h2>Login</h2>
 
                 <label>Username</label>
                 <input 
@@ -52,7 +52,7 @@ class SignUp extends React.Component {
 };
 
 const mapDispatchToProps = dispatch => ({
-    createUser: userParams => dispatch(createUser(userParams))
+    logInUser: userParams => dispatch(logInUser(userParams))
 });
 
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(null, mapDispatchToProps)(LogIn);
