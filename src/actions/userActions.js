@@ -1,5 +1,11 @@
 const API_URL = 'http://localhost:3001';
 
+//sets user object in store
+const logIn = (userObj) => ({
+    type: 'LOGIN_USER',
+    payload: userObj
+});
+
 export const createUser = (userParams) => {
     return (dispatch) => {
         dispatch({ type: 'CREATING_USER' });
@@ -66,7 +72,30 @@ export const logInUser = (userParams) => {
     }
 } 
 
-export const logIn = (userObj) => ({
-    type: 'LOGIN_USER',
-    payload: userObj
-});
+export const getUser = () => {
+    return dispatch => {
+        const token = localStorage.token;
+
+        if (token) {
+            return (
+                fetch(`${API_URL}/user_data`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Accepts: 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.error) {
+                        console.log('couldn\'t retrieve user data..');
+                    }
+                    else {
+                        dispatch(logIn(data.user))
+                    }
+                })
+            )
+        }
+    }
+}
