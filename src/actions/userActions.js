@@ -6,6 +6,10 @@ const logIn = (userObj) => ({
     payload: userObj
 });
 
+export const logOutUser = () => ({
+    type: 'LOGOUT_USER' 
+})
+
 export const createUser = (userParams) => {
     return (dispatch) => {
         dispatch({ type: 'CREATING_USER' });

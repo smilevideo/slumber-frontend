@@ -25,10 +25,10 @@ class SignUp extends React.Component {
     }
 
     render() {
-        return (
+        return (<React.Fragment>
+            <h2>Create an Account</h2>
+            {this.props.creatingUser ? <p>Creating User..</p> : null}
             <form onSubmit={this.handleSubmit}>
-                <h2>Create an Account</h2>
-
                 <table>
                     <tbody>
                         <tr>
@@ -61,12 +61,18 @@ class SignUp extends React.Component {
                     </tbody>
                 </table>
             </form>
-        )
+        </React.Fragment>)
     }
 };
+
+const mapStateToProps = (state) => {
+    return {
+        creatingUser: state.userReducer.creatingUser
+    }
+}
 
 const mapDispatchToProps = dispatch => ({
     createUser: userParams => dispatch(createUser(userParams))
 });
 
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

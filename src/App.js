@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getUser } from './actions/userActions';
 
 import Logo from './components/Logo';
+import LogOut from './components/LogOut';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 
@@ -16,6 +17,7 @@ class App extends React.Component {
     return (
       <Router>
         <Logo />  
+        <LogOut />
         <Route exact path='/signup' component={SignUp} />
         <Route exact path='/login' component={LogIn} />
       </Router>

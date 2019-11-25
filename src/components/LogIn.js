@@ -25,10 +25,10 @@ class LogIn extends React.Component {
     }
 
     render() {
-        return (
+        return (<React.Fragment>
+            <h2>Login</h2>
+            {this.props.loggingIn ? <p>Logging In..</p> : null}
             <form onSubmit={this.handleSubmit}>
-                <h2>Login</h2>
-
                 <table>
                     <tbody>
                         <tr>
@@ -61,12 +61,18 @@ class LogIn extends React.Component {
                     </tbody>
                 </table>
             </form>
-        )
+        </React.Fragment>)
     }
 };
+
+const mapStateToProps = (state) => {
+    return {
+        loggingIn: state.userReducer.loggingIn
+    }
+}
 
 const mapDispatchToProps = dispatch => ({
     logInUser: userParams => dispatch(logInUser(userParams))
 });
 
-export default connect(null, mapDispatchToProps)(LogIn);
+export default connect(mapStateToProps, mapDispatchToProps)(LogIn);
