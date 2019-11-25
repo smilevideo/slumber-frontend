@@ -29,7 +29,7 @@ class SignUp extends React.Component {
             <h2>Create an Account</h2>
 
             {this.props.creatingUser ? <p>Creating User..</p> : null}
-            {this.props.errorMessage ? <p>{this.props.errorMessage}</p> : null}
+            {this.props.signUpError ? <p>Username already taken, try again.</p> : null}
 
             <form onSubmit={this.handleSubmit}>
                 <table>
@@ -71,7 +71,7 @@ class SignUp extends React.Component {
 const mapStateToProps = (state) => {
     return {
         creatingUser: state.userReducer.creatingUser,
-        errorMessage: state.userReducer.errorMessage
+        signUpError: state.userReducer.signUpError
     }
 }
 

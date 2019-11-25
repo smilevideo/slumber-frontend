@@ -8,28 +8,28 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 creatingUser: true,
-                errorMessage: ''
+                signUpError: false
             }
 
         case 'ERROR_SIGNUP_ERROR':
             return {
                 ...state,
                 creatingUser: false,
-                errorMessage: 'Username already exists, try again',
+                signUpError: true
             }
 
         case 'LOGGING_IN':
             return {
                 ...state,
                 loggingIn: true,
-                errorMessage: ''
+                logInError: false
             }
 
         case 'ERROR_LOGIN_ERROR':
             return {
                 ...state,
                 loggingIn: false,
-                errorMessage: 'Invalid username or password, try again'
+                logInError: true
             }
             
         case 'LOGIN_USER':
@@ -38,7 +38,8 @@ export default (state = initialState, action) => {
                 currentUser: action.payload,
                 creatingUser: false,
                 loggingIn: false,
-                errorMessage: ''
+                signUpError: false,
+                logInError: false
             }
 
         case 'LOGOUT_USER':
