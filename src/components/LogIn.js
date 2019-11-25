@@ -41,6 +41,7 @@ class LogIn extends React.Component {
                         <tr>
                             <td>
                                 <input 
+                                    type='text'
                                     name='username'
                                     placeholder='Username'
                                     value={this.state.username}
@@ -49,6 +50,7 @@ class LogIn extends React.Component {
                             </td>
                             <td>
                                 <input
+                                    type='password'
                                     name='password'
                                     placeholder='Password'
                                     value={this.state.password}

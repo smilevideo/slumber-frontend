@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import uuid from 'react-uuid';
 
 class SleepOverView extends React.Component {
     render() {
@@ -8,11 +9,13 @@ class SleepOverView extends React.Component {
             {this.props.sleeps ?
             <ol>
                 {this.props.sleeps.map(sleep => {
-                    return <li>
-                        <p>{`${sleep.start_day}, ${sleep.start_time}-${sleep.end_day}, ${sleep.end_time}`}</p>
-                        <p>Total duration: {/*todo stuff*/}</p>
-                        <p>{`Note: ${sleep.note}`}</p>
-                        <p>{`Rating: ${sleep.rating}`}</p>
+                    return <li key={uuid()}>
+                        <div>{`${sleep.start_day}, ${sleep.start_time}-${sleep.end_day}, ${sleep.end_time}`}</div>
+                        <div>Total duration: {/*todo stuff*/}</div>
+                        <div>{`Rating: ${sleep.rating}`}</div>
+                        <br />
+                        <div>{`Note: ${sleep.note}`}</div>
+                        <br />
                     </li>
                 })}
             </ol> :
