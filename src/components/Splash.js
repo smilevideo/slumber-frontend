@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 class Splash extends React.Component {
     render() {
         return (<div>
-            <br />
+            <h2>Home</h2>
             {this.props.currentUser.username ? 
             <p>Welcome, {this.props.currentUser.username}.</p> :
             <p>Welcome, please sign up or log in.</p>}
