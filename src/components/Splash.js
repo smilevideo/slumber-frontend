@@ -6,7 +6,7 @@ class Splash extends React.Component {
         return (<div>
             <br />
             {this.props.currentUser.username ? 
-            <p>Welcome back, {this.props.currentUser.username}.</p> :
+            <p>Welcome, {this.props.currentUser.username}.</p> :
             <p>Welcome, please sign up or log in.</p>}
         </div>)
     }
