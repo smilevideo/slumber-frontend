@@ -8,14 +8,6 @@ const logIn = (userObj) => ({
     payload: userObj
 });
 
-const failedLogIn = () => ({
-    type: 'ERROR_LOGIN_ERROR'
-})
-
-const failedSignUp = () => ({
-    type: 'ERROR_SIGNUP_ERROR'
-})
-
 export const logOutUser = () => {
     return (dispatch) => {
         dispatch({ type: 'LOGOUT_USER' });
@@ -43,7 +35,7 @@ export const createUser = (userParams) => {
             .then(r => r.json())
             .then(data => {
                 if (data.error) {
-                    dispatch(failedSignUp());
+                    dispatch({ type: 'CREATE_USER_ERROR' });
                 }
                 else {
                     localStorage.setItem('token', data.jwt)
@@ -75,7 +67,7 @@ export const logInUser = (userParams) => {
             .then(r => r.json())
             .then(data => {
                 if (data.error) {
-                    dispatch(failedLogIn())
+                    dispatch({ type: 'LOGIN_ERROR' })
                 }
                 else {
                     localStorage.setItem('token', data.jwt);
@@ -112,5 +104,38 @@ export const getUser = () => {
                 })
             )
         }
+    }
+}
+
+export const createSleep = (sleepParams) => {
+    const token = localStorage.token; 
+    
+    return (dispatch) => {
+        dispatch({ type: 'CREATING_SLEEP' });
+        return (
+            fetch(`${API_URL}/sleeps`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    sleep: sleepParams
+                })
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.error) {
+                    dispatch({ type: 'CREATE_SLEEP_ERROR' });
+                }
+                else {
+                    //refetch user data to include new sleep
+                    dispatch(getUser());
+                    dispatch({ type: 'CREATED_SLEEP' })
+                    dispatch(push('/sleeps'));
+                }
+            })
+        )
     }
 }

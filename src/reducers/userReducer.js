@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
                 signUpError: false
             }
 
-        case 'ERROR_SIGNUP_ERROR':
+        case 'CREATE_USER_ERROR':
             return {
                 ...state,
                 creatingUser: false,
@@ -25,7 +25,7 @@ export default (state = initialState, action) => {
                 logInError: false
             }
 
-        case 'ERROR_LOGIN_ERROR':
+        case 'LOGIN_ERROR':
             return {
                 ...state,
                 loggingIn: false,

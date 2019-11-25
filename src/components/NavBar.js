@@ -32,7 +32,25 @@ class NavBar extends React.Component {
                     activeStyle={{
                         background: 'darkblue'
                     }}
-                >Log Out</NavLink>  
+                >Log Out</NavLink>
+
+                <NavLink
+                    to='/sleeps'
+                    exact
+                    style={link}
+                    activeStyle={{
+                        background: 'darkblue'
+                    }}
+                >Sleep Overview</NavLink>
+
+                <NavLink
+                    to='/newsleep'
+                    exact
+                    style={link}
+                    activeStyle={{
+                        background: 'darkblue'
+                    }}
+                >Sleep Entry</NavLink>
             </span> 
             :
             <span>

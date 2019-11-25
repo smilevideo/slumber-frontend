@@ -7,11 +7,15 @@ import { getUser } from './actions/userActions';
 
 import Logo from './components/Logo';
 import NavBar from './components/NavBar';
-
 import Splash from './components/Splash';
+
+import LogOut from './components/LogOut';
+import SleepForm from './components/sleeps/SleepForm';
+
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
-import LogOut from './components/LogOut';
+import SleepOverview from './components/sleeps/SleepOverview.js';
+
 
 class App extends React.Component {
   componentDidMount() {
@@ -26,9 +30,11 @@ class App extends React.Component {
           <NavBar />
           <Switch>
             <Route exact path='/' component={Splash} />
+            <Route exact path='/sleeps' component={SleepOverview} />
+            <Route exact path='/newsleep' component={SleepForm} />
+            <Route exact path='/logout' component={LogOut} />
             <Route exact path='/signup' component={SignUp} />
             <Route exact path='/login' component={LogIn} />
-            <Route exact path='/logout' component={LogOut} />
           </Switch>
         </>
       </ConnectedRouter>
