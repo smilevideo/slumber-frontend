@@ -10,15 +10,11 @@ class LogOut extends React.Component {
     }
 
     render() {
-        return (<div>
-            {this.props.currentUser.username ? <button onClick={this.handleClick}>Log Out?</button> : null}
-        </div>)
-    }
-}
-
-const mapStateToProps = (state) => {
-    return {
-        currentUser: state.userReducer.currentUser
+        return (<React.Fragment>
+            <h2>Log Out</h2>
+            <p>Are you sure you wish to log out?</p>
+            <button onClick={this.handleClick}>Log Out</button>
+        </React.Fragment>)
     }
 }
 
@@ -28,4 +24,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(LogOut);
+export default connect(null, mapDispatchToProps)(LogOut);

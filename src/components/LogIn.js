@@ -27,7 +27,10 @@ class LogIn extends React.Component {
     render() {
         return (<React.Fragment>
             <h2>Login</h2>
+            
             {this.props.loggingIn ? <p>Logging In..</p> : null}
+            {this.props.errorMessage ? <p>{this.props.errorMessage}</p> : null}
+
             <form onSubmit={this.handleSubmit}>
                 <table>
                     <tbody>
@@ -67,7 +70,8 @@ class LogIn extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        loggingIn: state.userReducer.loggingIn
+        loggingIn: state.userReducer.loggingIn,
+        errorMessage: state.userReducer.errorMessage
     }
 }
 

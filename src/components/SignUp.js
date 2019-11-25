@@ -27,7 +27,10 @@ class SignUp extends React.Component {
     render() {
         return (<React.Fragment>
             <h2>Create an Account</h2>
+
             {this.props.creatingUser ? <p>Creating User..</p> : null}
+            {this.props.errorMessage ? <p>{this.props.errorMessage}</p> : null}
+
             <form onSubmit={this.handleSubmit}>
                 <table>
                     <tbody>
@@ -67,7 +70,8 @@ class SignUp extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        creatingUser: state.userReducer.creatingUser
+        creatingUser: state.userReducer.creatingUser,
+        errorMessage: state.userReducer.errorMessage
     }
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 const link = {
@@ -12,7 +13,7 @@ const link = {
 
 class NavBar extends React.Component {
     render() {
-        return (<React.Fragment>
+        return (<div>
             <NavLink
                 to='/'
                 exact
@@ -21,24 +22,46 @@ class NavBar extends React.Component {
                     background: 'darkblue'
                 }}
             >Home</NavLink>
-            <NavLink
-                to='/signup'
-                exact
-                styles={link}
-                activeStyle={{
-                    background: 'darkblue'
-                }}
-            >Sign Up</NavLink>
-            <NavLink
-                to='/login'
-                exact
-                styles={link}
-                activeStyle={{
-                    background: 'darkblue'
-                }}
-            >Log In</NavLink>
-        </React.Fragment>)
+
+            {this.props.currentUser.username ? 
+            <span>
+                <NavLink
+                    to='/logout'
+                    exact
+                    style={link}
+                    activeStyle={{
+                        background: 'darkblue'
+                    }}
+                >Log Out</NavLink>  
+            </span> 
+            :
+            <span>
+                <NavLink
+                    to='/signup'
+                    exact
+                    style={link}
+                    activeStyle={{
+                        background: 'darkblue'
+                    }}
+                >Sign Up</NavLink>
+                
+                <NavLink
+                    to='/login'
+                    exact
+                    style={link}
+                    activeStyle={{
+                        background: 'darkblue'
+                    }}
+                >Log In</NavLink>
+            </span>}
+        </div>)
     }
 }
 
-export default NavBar;
+const mapStateToProps = (state) => {
+    return {
+        currentUser: state.userReducer.currentUser
+    }
+}
+
+export default connect(mapStateToProps, null)(NavBar);

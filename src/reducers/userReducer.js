@@ -7,13 +7,29 @@ export default (state = initialState, action) => {
         case 'CREATING_USER':
             return {
                 ...state,
-                creatingUser: true
+                creatingUser: true,
+                errorMessage: ''
+            }
+
+        case 'ERROR_SIGNUP_ERROR':
+            return {
+                ...state,
+                creatingUser: false,
+                errorMessage: 'Username already exists, try again',
             }
 
         case 'LOGGING_IN':
             return {
                 ...state,
-                loggingIn: true
+                loggingIn: true,
+                errorMessage: ''
+            }
+
+        case 'ERROR_LOGIN_ERROR':
+            return {
+                ...state,
+                loggingIn: false,
+                errorMessage: 'Invalid username or password, try again'
             }
             
         case 'LOGIN_USER':
@@ -21,7 +37,8 @@ export default (state = initialState, action) => {
                 ...state,
                 currentUser: action.payload,
                 creatingUser: false,
-                loggingIn: false
+                loggingIn: false,
+                errorMessage: ''
             }
 
         case 'LOGOUT_USER':

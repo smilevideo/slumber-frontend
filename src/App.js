@@ -17,10 +17,10 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Logo />  
-        <LogOut />
+        <Logo />
         <NavBar />
         <Route exact path='/' component={null} />
+        <Route exact path='/logout' component={LogOut} />
         <Route exact path='/signup' component={SignUp} />
         <Route exact path='/login' component={LogIn} />
       </Router>

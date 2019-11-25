@@ -6,9 +6,18 @@ const logIn = (userObj) => ({
     payload: userObj
 });
 
+const failedLogIn = () => ({
+    type: 'ERROR_LOGIN_ERROR'
+})
+
+const failedSignUp = () => ({
+    type: 'ERROR_SIGNUP_ERROR'
+})
+
 export const logOutUser = () => ({
     type: 'LOGOUT_USER'
 })
+
 
 export const createUser = (userParams) => {
     return (dispatch) => {
@@ -31,8 +40,7 @@ export const createUser = (userParams) => {
             .then(data => {
                 console.log(data);
                 if (data.error) {
-                    //TO-DO: rerender with error component
-                    console.log('couldn\'t create user');
+                    dispatch(failedSignUp());
                 }
                 else {
                     localStorage.setItem('token', data.jwt)
@@ -64,8 +72,7 @@ export const logInUser = (userParams) => {
             .then(data => {
                 console.log(data);
                 if (data.error) {
-                    //TO-DO: rerender with error component
-                    console.log('couldn\'t log in');
+                    dispatch(failedLogIn())
                 }
                 else {
                     localStorage.setItem('token', data.jwt);
