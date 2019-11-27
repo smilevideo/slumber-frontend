@@ -30,7 +30,7 @@ class SleepForm extends React.Component {
 
     render() {
         return (<React.Fragment>
-            <h2>Add a Sleep Entry</h2>
+            <h2>New Sleep Entry</h2>
 
             {this.props.creatingSleep ? <p>Adding Sleep..</p> : null}
             {this.props.createSleepError ? <p>Error, try again.</p> : null}
@@ -94,10 +94,9 @@ class SleepForm extends React.Component {
                 <label><strong>Note (optional):</strong></label><br />
                 <textarea
                     name='note'
-                    placeholder='(Any notes, max 400 characters)'
-                    maxLength='400'
-                    cols='60'
-                    rows='10'
+                    placeholder='(Enter note here)'
+                    cols='50'
+                    rows='8'
                     value={this.state.note}
                     onChange={this.handleChange}
                 /><br /><br />

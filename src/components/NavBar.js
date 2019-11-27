@@ -6,7 +6,6 @@ const link = {
     width: '100px',
     padding: '12px',
     margin: '0 6px 0px',
-    background: 'blue',
     textDecoration: 'none',
     color: 'white'
 }
@@ -17,7 +16,7 @@ class NavBar extends React.Component {
             <NavLink
                 to='/'
                 exact
-                style={link}
+                style={{...link, background: 'black'}}
                 activeStyle={{
                     background: 'darkblue'
                 }}
@@ -28,7 +27,7 @@ class NavBar extends React.Component {
                 <NavLink
                     to='/logout'
                     exact
-                    style={link}
+                    style={{...link, background: 'purple'}}
                     activeStyle={{
                         background: 'darkblue'
                     }}
@@ -37,7 +36,7 @@ class NavBar extends React.Component {
                 <NavLink
                     to='/sleeps'
                     exact
-                    style={link}
+                    style={{...link, background: 'blue'}}
                     activeStyle={{
                         background: 'darkblue'
                     }}
@@ -46,7 +45,7 @@ class NavBar extends React.Component {
                 <NavLink
                     to='/newsleep'
                     exact
-                    style={link}
+                    style={{...link, background: 'blue'}}
                     activeStyle={{
                         background: 'darkblue'
                     }}
@@ -57,7 +56,7 @@ class NavBar extends React.Component {
                 <NavLink
                     to='/signup'
                     exact
-                    style={link}
+                    style={{...link, background: 'purple'}}
                     activeStyle={{
                         background: 'darkblue'
                     }}
@@ -66,7 +65,7 @@ class NavBar extends React.Component {
                 <NavLink
                     to='/login'
                     exact
-                    style={link}
+                    style={{...link, background: 'purple'}}
                     activeStyle={{
                         background: 'darkblue'
                     }}

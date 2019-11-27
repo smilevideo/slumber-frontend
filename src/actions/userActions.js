@@ -109,7 +109,7 @@ export const getUser = () => {
 
 export const createSleep = (sleepParams) => {
     const token = localStorage.token; 
-    
+
     return (dispatch) => {
         dispatch({ type: 'CREATING_SLEEP' });
         return (
@@ -139,3 +139,4 @@ export const createSleep = (sleepParams) => {
         )
     }
 }
+

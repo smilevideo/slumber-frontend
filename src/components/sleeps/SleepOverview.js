@@ -7,14 +7,14 @@ class SleepOverView extends React.Component {
         return (<React.Fragment>
             <h2>Sleep Overview</h2>
             {this.props.sleeps ?
-            <ol>
+            <ol className='sleepList'>
                 {this.props.sleeps.map(sleep => {
                     return <li key={uuid()}>
-                        <div>{`${sleep.start_day}, ${sleep.start_time}-${sleep.end_day}, ${sleep.end_time}`}</div>
-                        <div>Total duration: {/*todo stuff*/}</div>
-                        <div>{`Rating: ${sleep.rating}`}</div>
+                        <div><strong>Period: </strong>{`${sleep.start_day}, ${sleep.start_time} to ${sleep.end_day}, ${sleep.end_time}`}</div>
+                        <div><strong>Total duration: </strong>{/*todo stuff*/}</div>
+                        <div><span>Rating: </span>{sleep.rating ? sleep.rating : 'N/A'}</div>
                         <br />
-                        <div>{`Note: ${sleep.note}`}</div>
+                        <div><span>Note: </span>{sleep.note ? sleep.note : 'N/A'}</div>
                         <br />
                     </li>
                 })}
