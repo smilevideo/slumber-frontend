@@ -46,6 +46,9 @@ class SleepForm extends React.Component {
                         </tr>
                         <tr>
                             <td>
+                                <input
+                                    type='radio' 
+                                />
                                 <input 
                                     required
                                     type='date'
