@@ -30,9 +30,9 @@ class App extends React.Component {
           <Logo />
           <NavBar />
           <Switch>
-            <Route path={`/sleeps/:sleepId`} component={SleepView} />
             <Route exact path='/' component={Splash} />
             <Route exact path='/sleeps' component={SleepOverview} />
+            <Route exact path={`/sleeps/:sleepId`} component={SleepView} />
             <Route exact path='/newsleep' component={SleepForm} />
             <Route exact path='/logout' component={LogOut} />
             <Route exact path='/signup' component={SignUp} />

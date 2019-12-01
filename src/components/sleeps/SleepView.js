@@ -2,19 +2,41 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 class SleepView extends React.Component {
-    render() {
-        const { match } = this.props;
-        const id = parseInt(match.params.sleepId, 10);
-        if (this.props.sleeps) {
-            const sleep = this.props.sleeps.find(sleep => {
+    constructor(props) {
+        super(props);
+
+        const id = parseInt(props.match.params.sleepId, 10);
+        if (props.sleeps) {
+            this.sleep = this.props.sleeps.find(sleep => {
                 return sleep.id === id;
             })
-            console.log(sleep);
-        }           
+        }
+    }
+
+    render() {
+        console.log(this.sleep);
 
         return (<React.Fragment>
-            <h2>Sleep id</h2>
+            {typeof(this.sleep) !== 'undefined' ? 
+                <>
+                <h2>Sleep from {`${this.sleep.start_day}, ${this.sleep.start_time}`} to {`${this.sleep.end_day}, ${this.sleep.end_time}`}</h2> 
+                <p><strong>Note: </strong>{this.sleep.note}</p>
+                <p><strong>Rating: </strong>{this.sleep.rating}</p>
+                
+                <h3>Dreams: <button>Add Dream</button></h3>
+                <ol>
+                    {this.sleep.dreams.map(dream => {
+                        return (<li>
+                            {dream.description}
+                        </li>)
+                    })}
+                </ol>
+                
+                
+                </>
+            : null} 
         </React.Fragment>)
+        
     }
 };
 

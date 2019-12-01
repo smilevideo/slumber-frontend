@@ -9,3 +9,4 @@ React/Redux frontend for Slumber, a sleep log/dream diary/sleep-performance anal
 ## Bugs to Fix: (will address once more base functionality is finished)
 - when refreshing while logged in, navbar momentarily shows the logged-out buttons
 - when moving to a different tab while there is an error message, the error message is still there upon return
+- refreshing on individual sleep page does not populate with the sleep's data
