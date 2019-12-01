@@ -15,6 +15,7 @@ import SleepForm from './components/sleeps/SleepForm';
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import SleepOverview from './components/sleeps/SleepOverview.js';
+import SleepView from './components/sleeps/SleepView';
 
 
 class App extends React.Component {
@@ -29,6 +30,7 @@ class App extends React.Component {
           <Logo />
           <NavBar />
           <Switch>
+            <Route path={`/sleeps/:sleepId`} component={SleepView} />
             <Route exact path='/' component={Splash} />
             <Route exact path='/sleeps' component={SleepOverview} />
             <Route exact path='/newsleep' component={SleepForm} />

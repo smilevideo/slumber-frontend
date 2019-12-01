@@ -1,17 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import uuid from 'react-uuid';
 
 class SleepOverview extends React.Component {
     render() {
+        const { match } = this.props
         return (<React.Fragment>
             <h2>Sleep Overview</h2>
             {this.props.sleeps ?
             <ol className='sleepList'>
                 {this.props.sleeps.map(sleep => {
                     return <li key={sleep.id}>
-                        <div><Link to={`/sleeps/${sleep.id}`}>{`${sleep.start_day}, ${sleep.start_time} to ${sleep.end_day}, ${sleep.end_time}`}</Link></div>
+                        <div><Link to={`${match.url}/${sleep.id}`}>{`${sleep.start_day}, ${sleep.start_time} to ${sleep.end_day}, ${sleep.end_time}`}</Link></div>
                         <div><strong>Total duration: </strong>{/*todo stuff*/}</div>
                         <div><span>Rating: </span>{sleep.rating ? sleep.rating : 'N/A'}</div>
                         <br />
@@ -22,6 +22,8 @@ class SleepOverview extends React.Component {
             </ol> :
             null
             }
+            
+            
         </React.Fragment>)
     }
 };

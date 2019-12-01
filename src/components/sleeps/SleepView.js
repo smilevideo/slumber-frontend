@@ -1,11 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import uuid from 'react-uuid';
 
 class SleepView extends React.Component {
     render() {
+        const { match } = this.props;
+        const id = parseInt(match.params.sleepId, 10);
+        if (this.props.sleeps) {
+            const sleep = this.props.sleeps.find(sleep => {
+                return sleep.id === id;
+            })
+            console.log(sleep);
+        }           
+
         return (<React.Fragment>
-            <h2>Sleep Overview</h2>
+            <h2>Sleep id</h2>
         </React.Fragment>)
     }
 };
