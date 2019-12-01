@@ -46,9 +46,10 @@ class SleepForm extends React.Component {
                         </tr>
                         <tr>
                             <td>
-                                <input
+                                {/* possibly want to add radio buttons for today/yesterday */}
+                                {/* <input
                                     type='radio' 
-                                />
+                                /> */}
                                 <input 
                                     required
                                     type='date'
