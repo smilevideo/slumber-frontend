@@ -48,6 +48,8 @@ export default (state = initialState, action) => {
                 currentUser: {}
             }
 
+            
+
         default:
             return state;
     }

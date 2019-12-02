@@ -166,7 +166,6 @@ export const createDream = (dreamParams) => {
                     /* refetch user data to include new dream */
                     dispatch(getUser());
                     dispatch({ type: 'CREATED_DREAM' })
-                    // dispatch(push('/dreams'));
                 }
             })
         )

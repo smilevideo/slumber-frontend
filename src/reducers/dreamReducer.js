@@ -1,10 +1,17 @@
 const initialState = {
+    addingDream: false,
     creatingDream: false,
     createDreamError: false
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case 'ADDING_DREAM':
+            return {
+                ...state,
+                addingDream: true
+            }
+
         case 'CREATING_DREAM':
             return {
                 ...state,
@@ -23,7 +30,8 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 creatingDream: false,
-                createDreamError: false
+                createDreamError: false,
+                addingDream: false
             }
 
         default: 

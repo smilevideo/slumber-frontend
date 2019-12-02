@@ -3,18 +3,8 @@ import { connect } from 'react-redux';
 import DreamForm from '../dreams/DreamForm';
 
 class SleepView extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            addingDream: false
-        }
-    }
-
     handleClick = event => {
-        this.setState({
-            addingDream: true
-        })
+        this.props.addSleep();
     }
 
     render() {
@@ -33,17 +23,15 @@ class SleepView extends React.Component {
                 <p><strong>Rating: </strong>{this.sleep.rating}</p>
                 
                 <h3>Dreams: </h3>
-                {this.state.addingDream ? <DreamForm sleepId={this.sleep.id} /> : <button onClick={this.handleClick}>Add Dream</button>}                
+                {this.props.addingDream ? <DreamForm sleepId={this.sleep.id} /> : <button onClick={this.handleClick}>Add Dream</button>}
                 <ol>
                     {this.sleep.dreams.map(dream => {
                         return (<li key={dream.id}>
                             <p>{dream.description}</p>
-                            {dream.mood ? <p>Mood: {dream.mood}</p> : null}
+                            {dream.mood !== '' ? <p>Mood: {dream.mood}</p> : null}
                         </li>)
                     })}
                 </ol>
-                
-                
                 </>
             : null} 
         </React.Fragment>)
@@ -53,12 +41,13 @@ class SleepView extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        sleeps: state.userReducer.currentUser.sleeps
+        sleeps: state.userReducer.currentUser.sleeps,
+        addingDream: state.dreamReducer.addingDream
     }
 }
 
 const mapDispatchToProps = dispatch => ({
-
+    addSleep: () => dispatch({type: 'ADDING_DREAM' })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SleepView);
