@@ -140,3 +140,35 @@ export const createSleep = (sleepParams) => {
     }
 }
 
+export const createDream = (dreamParams) => {
+    const token = localStorage.token; 
+
+    return (dispatch) => {
+        dispatch({ type: 'CREATING_DREAM' });
+        return (
+            fetch(`${API_URL}/dreams`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    dream: dreamParams
+                })
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.error) {
+                    dispatch({ type: 'CREATE_DREAM_ERROR' });
+                }
+                else {
+                    /* refetch user data to include new dream */
+                    dispatch(getUser());
+                    dispatch({ type: 'CREATED_DREAM' })
+                    // dispatch(push('/dreams'));
+                }
+            })
+        )
+    }
+}

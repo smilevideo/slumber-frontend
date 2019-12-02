@@ -23,7 +23,6 @@ class SleepOverview extends React.Component {
             null
             }
             
-            
         </React.Fragment>)
     }
 };
