@@ -1,4 +1,6 @@
 const initialState = {
+    creatingDream: false,
+    createDreamError: false
 };
 
 export default (state = initialState, action) => {

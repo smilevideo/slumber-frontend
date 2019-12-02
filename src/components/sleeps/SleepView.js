@@ -7,13 +7,14 @@ class SleepView extends React.Component {
         super(props);
 
         this.state = {
-            
+            addingDream: false
         }
     }
 
     handleClick = event => {
-        const formCreator = document.getElementById('addDreams')
-        formCreator.appendChild(DreamForm);
+        this.setState({
+            addingDream: true
+        })
     }
 
     render() {
@@ -32,12 +33,12 @@ class SleepView extends React.Component {
                 <p><strong>Rating: </strong>{this.sleep.rating}</p>
                 
                 <h3>Dreams: </h3>
-                <button onClick={this.handleClick}>Add Dream</button>
-                <div id='addDreams'></div>
+                {this.state.addingDream ? <DreamForm sleepId={this.sleep.id} /> : <button onClick={this.handleClick}>Add Dream</button>}                
                 <ol>
                     {this.sleep.dreams.map(dream => {
-                        return (<li>
-                            {dream.description}
+                        return (<li key={dream.id}>
+                            <p>{dream.description}</p>
+                            {dream.mood ? <p>Mood: {dream.mood}</p> : null}
                         </li>)
                     })}
                 </ol>

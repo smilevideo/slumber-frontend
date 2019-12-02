@@ -23,7 +23,7 @@ class DreamForm extends React.Component {
 
         this.props.createDream({
             ...this.state,
-            sleepId: this.props.sleepId
+            sleep_id: this.props.sleepId
         });
     }
 

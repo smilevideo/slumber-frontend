@@ -1,4 +1,6 @@
 const initialState = {
+    creatingSleep: false,
+    createSleepError: false
 };
 
 export default (state = initialState, action) => {
