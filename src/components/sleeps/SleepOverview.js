@@ -2,35 +2,40 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
-import parse from 'date-fns/parse';
+import { parse, areIntervalsOverlapping, isBefore, isAfter } from 'date-fns';
 
 class SleepOverview extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            selectedDateRange: null
+            selectedDateStart: null,
+            selectedDateEnd: null
         };
     }
 
     onChange = (date) => {
-        console.log(date);
-        // debugger;
-        this.setState({ selectedDateRange: date });
+        this.setState({ 
+            selectedDateStart: date[0],
+            selectedDateEnd: date[1]
+        });
     }
 
     render() {
-        if (this.props.sleeps) {
-            this.props.sleeps.forEach(sleep => {
-                console.log(sleep.start_day);
-                console.log(parse(sleep.start_day, 'yyyy-MM-dd', new Date()));
-            })
-
+        if (this.props.sleeps && this.state.selectedDateEnd) {
             this.selectedSleeps = this.props.sleeps.filter(sleep => {
+                const sleepStartDate = parse(`${sleep.start_day} ${sleep.start_time}`, 'yyyy-MM-dd HH:mm', new Date());
+                const sleepEndDate = parse(`${sleep.end_day} ${sleep.end_time}`, 'yyyy-MM-dd HH:mm', new Date());
+
                 return (
-                    false //TODO
-                )
+                    areIntervalsOverlapping(
+                        { start: sleepStartDate, end: sleepEndDate },
+                        { start: this.state.selectedDateStart, end: this.state.selectedDateEnd }
+                    )
+                );
             });
+            console.log('start: ', this.state.selectedDateStart);
+            console.log('end: ', this.state.selectedDateEnd);
         }
 
         return (<React.Fragment>
@@ -38,17 +43,16 @@ class SleepOverview extends React.Component {
             <p>Select a range to look at:</p>
             <Calendar
                 onChange={this.onChange}
-                value={this.state.selectedDateRange}
+                value={[this.state.selectedDateStart, this.state.selectedDateEnd]}
                 maxDate={new Date()}
                 minDate={new Date(1900, 1, 1)}
                 calendarType='US'
                 selectRange={true}
             />
-            
-            
-            {this.props.sleeps ?
+
+            {this.selectedSleeps ?
             <ol className='sleepList'>
-                {this.props.sleeps.map(sleep => {
+                {this.selectedSleeps.map(sleep => {
                     return <li key={sleep.id}>
                         <div><Link to={`sleeps/${sleep.id}`}>{`${sleep.start_day}, ${sleep.start_time} to ${sleep.end_day}, ${sleep.end_time}`}</Link></div>
                         <div><strong>Total duration: </strong>{/*todo stuff*/}</div>
