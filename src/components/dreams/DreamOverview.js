@@ -10,12 +10,13 @@ class DreamOverview extends React.Component {
             {this.props.sleeps ?
             <ol className='dreamList'>
                 {this.props.sleeps.map(sleep => {
-                    return <li key={sleep.id}>
-                        <div><span>Rating: </span>{sleep.rating ? sleep.rating : 'N/A'}</div>
-                        <br />
-                        <div><span>Note: </span>{sleep.note ? sleep.note : 'N/A'}</div>
-                        <br />
-                    </li>
+                    return <div key={sleep.id}>
+                        {sleep.dreams.map(dream => {
+                            return (<li key={dream.id}>
+                                {dream.description}
+                            </li>)
+                        })}
+                    </div>
                 })}
             </ol> :
             null
