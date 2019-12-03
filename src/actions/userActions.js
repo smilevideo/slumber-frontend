@@ -126,6 +126,7 @@ export const createSleep = (sleepParams) => {
             })
             .then(r => r.json())
             .then(data => {
+                console.log(data);
                 if (data.error) {
                     dispatch({ type: 'CREATE_SLEEP_ERROR' });
                 }
@@ -133,7 +134,7 @@ export const createSleep = (sleepParams) => {
                     //refetch user data to include new sleep
                     dispatch(getUser());
                     dispatch({ type: 'CREATED_SLEEP' })
-                    dispatch(push('/sleeps'));
+                    dispatch(push(`/sleeps/${data.sleep.id}`));
                 }
             })
         )

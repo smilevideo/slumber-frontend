@@ -49,7 +49,17 @@ class NavBar extends React.Component {
                     activeStyle={{
                         background: 'darkblue'
                     }}
-                >Sleep Entry</NavLink>
+                >Record Sleep</NavLink>
+
+                <NavLink
+                    to='/dreams'
+                    exact
+                    style={{...link, background: 'blue'}}
+                    activeStyle={{
+                        background: 'darkblue'
+                    }}
+                >Dream List</NavLink>
+
             </span> 
             :
             <span>

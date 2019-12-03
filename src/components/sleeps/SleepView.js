@@ -28,7 +28,7 @@ class SleepView extends React.Component {
                     {this.sleep.dreams.map(dream => {
                         return (<li key={dream.id}>
                             <p>{dream.description}</p>
-                            {dream.mood !== '' ? <p>Mood: {dream.mood}</p> : null}
+                            {typeof(dream.mood) === 'number' ? <p>Mood: {dream.mood}</p> : null}
                         </li>)
                     })}
                 </ol>

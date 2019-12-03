@@ -35,4 +35,4 @@ const mapDispatchToProps = dispatch => ({
     
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SleepOverview);
+export default connect(mapStateToProps, mapDispatchToProps)(DreamOverview);
