@@ -24,14 +24,14 @@ class SleepView extends React.Component {
                 
                 <h3>Dreams: </h3>
                 {this.props.addingDream ? <DreamForm sleepId={this.sleep.id} /> : <button onClick={this.handleClick}>Add Dream</button>}
-                <ol>
+                <ul>
                     {this.sleep.dreams.map(dream => {
                         return (<li key={dream.id}>
                             <p>{dream.description}</p>
                             {typeof(dream.mood) === 'number' ? <p>Mood: {dream.mood}</p> : null}
                         </li>)
                     })}
-                </ol>
+                </ul>
                 </>
             : null} 
         </React.Fragment>)
