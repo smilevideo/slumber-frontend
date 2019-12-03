@@ -1,5 +1,6 @@
 # slumber-frontend
-React/Redux frontend for Slumber, a sleep log/dream diary/sleep-performance analytics web app
+React/Redux frontend for Slumber, a sleep log/dream diary/~~sleep-performance analytics~~ web app.
+Also makes use of the react-calendar and date-fns packages
 
 ## Future Improvements:
 - Move token from localStorage to an httpOnly cookie

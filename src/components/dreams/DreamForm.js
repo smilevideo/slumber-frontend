@@ -37,6 +37,7 @@ class DreamForm extends React.Component {
             <form onSubmit={this.handleSubmit}>
                 <label><strong>Description:</strong></label><br />
                 <textarea
+                    required
                     name='description'
                     cols='50'
                     rows='8'
@@ -44,8 +45,9 @@ class DreamForm extends React.Component {
                     onChange={this.handleChange}
                 /><br /><br />
 
-                <label><strong>Mood (optional):</strong></label><br />
-                <input 
+                <label><strong>Mood:</strong></label><br />
+                <input
+                    required
                     type='number'
                     min='-5'
                     max='5'
@@ -55,7 +57,7 @@ class DreamForm extends React.Component {
                     onChange={this.handleChange}
                 /><br /><br />
 
-                <input type='submit' value='Add Dream'/> 
+                <input type='submit' value='Submit Dream'/> 
             </form>
         </React.Fragment>)
     }

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
-import { parse, areIntervalsOverlapping, isBefore, isAfter } from 'date-fns';
+import { parse, areIntervalsOverlapping, format, differenceInMinutes } from 'date-fns';
 
 class SleepOverview extends React.Component {
     constructor(props) {
@@ -19,6 +19,7 @@ class SleepOverview extends React.Component {
             selectedDateStart: date[0],
             selectedDateEnd: date[1]
         });
+        
     }
 
     render() {
@@ -27,6 +28,8 @@ class SleepOverview extends React.Component {
                 const sleepStartDate = parse(`${sleep.start_day} ${sleep.start_time}`, 'yyyy-MM-dd HH:mm', new Date());
                 const sleepEndDate = parse(`${sleep.end_day} ${sleep.end_time}`, 'yyyy-MM-dd HH:mm', new Date());
 
+                console.log(this.state.selectedDateStart.toString().split(' ').slice(1, 4).join(' '))
+
                 return (
                     areIntervalsOverlapping(
                         { start: sleepStartDate, end: sleepEndDate },
@@ -34,13 +37,10 @@ class SleepOverview extends React.Component {
                     )
                 );
             });
-            console.log('start: ', this.state.selectedDateStart);
-            console.log('end: ', this.state.selectedDateEnd);
         }
 
         return (<React.Fragment>
             <h2>Sleep Overview</h2>
-            <p>Select a range to look at:</p>
             <Calendar
                 onChange={this.onChange}
                 value={[this.state.selectedDateStart, this.state.selectedDateEnd]}
@@ -51,19 +51,38 @@ class SleepOverview extends React.Component {
             />
 
             {this.selectedSleeps ?
+            <>
+            <h3>{
+                //check if start and end of range are the same day
+                this.state.selectedDateStart.toString().split(' ').slice(1, 4).join(' ')
+                    ===
+                    this.state.selectedDateEnd.toString().split(' ').slice(1, 4).join(' ')
+                ?
+                `${format(this.state.selectedDateStart, 'eeee, MMMM do yyyy')}:`
+                :
+                `${format(this.state.selectedDateStart, 'eeee, MMMM do yyyy')}
+                    to 
+                    ${format(this.state.selectedDateEnd, 'eeee, MMMM do yyyy')}
+                    :`   
+            }</h3>
+            
             <ol className='sleepList'>
                 {this.selectedSleeps.map(sleep => {
                     return <li key={sleep.id}>
                         <div><Link to={`sleeps/${sleep.id}`}>{`${sleep.start_day}, ${sleep.start_time} to ${sleep.end_day}, ${sleep.end_time}`}</Link></div>
                         <div><strong>Total duration: </strong>{/*todo stuff*/}</div>
-                        <div><span>Rating: </span>{sleep.rating ? sleep.rating : 'N/A'}</div>
+                        <br />
+                        <div>{`Rating: ${sleep.rating ? sleep.rating : 'N/A'}`}</div>
                         <br />
                         <div><span>Note: </span>{sleep.note ? sleep.note : 'N/A'}</div>
                         <br />
+                        <div><span>Dream(s) Recorded?: </span>{sleep.dreams.length > 0 ? 'Yes' : 'No'}</div>
                     </li>
                 })}
-            </ol> :
-            null
+            </ol>
+            </>
+            :
+            <h3>Please select a date range in the calendar above.</h3>
             }
             
         </React.Fragment>)
