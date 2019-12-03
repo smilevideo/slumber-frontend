@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
+import parse from 'date-fns/parse';
 
 class SleepOverview extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            //sets initial selected date to today
             selectedDateRange: null
         };
     }
@@ -21,6 +21,11 @@ class SleepOverview extends React.Component {
 
     render() {
         if (this.props.sleeps) {
+            this.props.sleeps.forEach(sleep => {
+                console.log(sleep.start_day);
+                console.log(parse(sleep.start_day, 'yyyy-MM-dd', new Date()));
+            })
+
             this.selectedSleeps = this.props.sleeps.filter(sleep => {
                 return (
                     false //TODO
@@ -39,6 +44,7 @@ class SleepOverview extends React.Component {
                 calendarType='US'
                 selectRange={true}
             />
+            
             
             {this.props.sleeps ?
             <ol className='sleepList'>
