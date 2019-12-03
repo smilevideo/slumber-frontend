@@ -9,41 +9,50 @@ class SleepOverview extends React.Component {
         super(props);
 
         this.state = {
-            selectedDateStart: null,
-            selectedDateEnd: null
+            selectedStartDate: null,
+            selectedEndDate: null
         };
     }
 
     onChange = (date) => {
         this.setState({ 
-            selectedDateStart: date[0],
-            selectedDateEnd: date[1]
+            selectedStartDate: date[0],
+            selectedEndDate: date[1]
         });
         
     }
 
     render() {
-        if (this.props.sleeps && this.state.selectedDateEnd) {
+        if (this.props.sleeps && this.state.selectedEndDate) {
             this.selectedSleeps = this.props.sleeps.filter(sleep => {
                 const sleepStartDate = parse(`${sleep.start_day} ${sleep.start_time}`, 'yyyy-MM-dd HH:mm', new Date());
                 const sleepEndDate = parse(`${sleep.end_day} ${sleep.end_time}`, 'yyyy-MM-dd HH:mm', new Date());
 
-                console.log(this.state.selectedDateStart.toString().split(' ').slice(1, 4).join(' '))
+                console.log(this.state.selectedStartDate.toString().split(' ').slice(1, 4).join(' '))
 
                 return (
                     areIntervalsOverlapping(
                         { start: sleepStartDate, end: sleepEndDate },
-                        { start: this.state.selectedDateStart, end: this.state.selectedDateEnd }
+                        { start: this.state.selectedStartDate, end: this.state.selectedEndDate }
                     )
                 );
             });
+
+            //add start and end dates as JS date attributes to each sleep in selection
+            this.selectedSleeps = this.selectedSleeps.map(sleep => {
+                return ({
+                    ...sleep, 
+                    startDate: parse(`${sleep.start_day} ${sleep.start_time}`, 'yyyy-MM-dd HH:mm', new Date()),
+                    endDate: parse(`${sleep.end_day} ${sleep.end_time}`, 'yyyy-MM-dd HH:mm', new Date())
+                })
+            })
         }
 
         return (<React.Fragment>
             <h2>Sleep Overview</h2>
             <Calendar
                 onChange={this.onChange}
-                value={[this.state.selectedDateStart, this.state.selectedDateEnd]}
+                value={[this.state.selectedStartDate, this.state.selectedEndDate]}
                 maxDate={new Date()}
                 minDate={new Date(1900, 1, 1)}
                 calendarType='US'
@@ -54,23 +63,28 @@ class SleepOverview extends React.Component {
             <>
             <h3>{
                 //check if start and end of range are the same day
-                this.state.selectedDateStart.toString().split(' ').slice(1, 4).join(' ')
+                this.state.selectedStartDate.toString().split(' ').slice(1, 4).join(' ')
                     ===
-                    this.state.selectedDateEnd.toString().split(' ').slice(1, 4).join(' ')
+                    this.state.selectedEndDate.toString().split(' ').slice(1, 4).join(' ')
                 ?
-                `${format(this.state.selectedDateStart, 'eeee, MMMM do yyyy')}:`
+                `${format(this.state.selectedStartDate, 'eeee, MMMM do yyyy')}:`
                 :
-                `${format(this.state.selectedDateStart, 'eeee, MMMM do yyyy')}
+                `${format(this.state.selectedStartDate, 'eeee, MMMM do yyyy')}
                     to 
-                    ${format(this.state.selectedDateEnd, 'eeee, MMMM do yyyy')}
+                    ${format(this.state.selectedEndDate, 'eeee, MMMM do yyyy')}
                     :`   
             }</h3>
-            
+
+            {this.selectedSleeps.length > 0 
+            ?
             <ol className='sleepList'>
                 {this.selectedSleeps.map(sleep => {
+                    const duration = `${Math.floor(Math.abs(differenceInMinutes(sleep.startDate, sleep.endDate)) / 60)}h 
+                        ${Math.abs(differenceInMinutes(sleep.startDate, sleep.endDate)) % 60}m`
+
                     return <li key={sleep.id}>
                         <div><Link to={`sleeps/${sleep.id}`}>{`${sleep.start_day}, ${sleep.start_time} to ${sleep.end_day}, ${sleep.end_time}`}</Link></div>
-                        <div><strong>Total duration: </strong>{/*todo stuff*/}</div>
+                        <div><strong>Total duration: </strong>{duration}</div>
                         <br />
                         <div>{`Rating: ${sleep.rating ? sleep.rating : 'N/A'}`}</div>
                         <br />
@@ -80,6 +94,9 @@ class SleepOverview extends React.Component {
                     </li>
                 })}
             </ol>
+            :
+            <p>No sleep recorded for this period.</p>
+            }
             </>
             :
             <h3>Please select a date range in the calendar above.</h3>
