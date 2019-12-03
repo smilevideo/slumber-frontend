@@ -1,17 +1,50 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Calendar from 'react-calendar';
 
 class SleepOverview extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            //sets initial selected date to today
+            selectedDateRange: null
+        };
+    }
+
+    onChange = (date) => {
+        console.log(date);
+        // debugger;
+        this.setState({ selectedDateRange: date });
+    }
+
     render() {
-        const { match } = this.props
+        if (this.props.sleeps) {
+            this.selectedSleeps = this.props.sleeps.filter(sleep => {
+                return (
+                    false //TODO
+                )
+            });
+        }
+
         return (<React.Fragment>
             <h2>Sleep Overview</h2>
+            <p>Select a range to look at:</p>
+            <Calendar
+                onChange={this.onChange}
+                value={this.state.selectedDateRange}
+                maxDate={new Date()}
+                minDate={new Date(1900, 1, 1)}
+                calendarType='US'
+                selectRange={true}
+            />
+            
             {this.props.sleeps ?
             <ol className='sleepList'>
                 {this.props.sleeps.map(sleep => {
                     return <li key={sleep.id}>
-                        <div><Link to={`${match.url}/${sleep.id}`}>{`${sleep.start_day}, ${sleep.start_time} to ${sleep.end_day}, ${sleep.end_time}`}</Link></div>
+                        <div><Link to={`sleeps/${sleep.id}`}>{`${sleep.start_day}, ${sleep.start_time} to ${sleep.end_day}, ${sleep.end_time}`}</Link></div>
                         <div><strong>Total duration: </strong>{/*todo stuff*/}</div>
                         <div><span>Rating: </span>{sleep.rating ? sleep.rating : 'N/A'}</div>
                         <br />

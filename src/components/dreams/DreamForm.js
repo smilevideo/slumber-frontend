@@ -50,7 +50,7 @@ class DreamForm extends React.Component {
                     min='-5'
                     max='5'
                     name='mood'
-                    placeholder='(-5 <= x <= 5)'
+                    placeholder='-5 to 5'
                     value={this.state.mood}
                     onChange={this.handleChange}
                 /><br /><br />
