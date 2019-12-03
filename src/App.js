@@ -1,26 +1,53 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Switch, Route } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import { history } from './index.js';
+import { connect } from 'react-redux';
+import { getUser } from './actions/userActions';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Logo from './components/Logo';
+import NavBar from './components/NavBar';
+import Splash from './components/Splash';
+
+import LogOut from './components/LogOut';
+import SleepForm from './components/sleeps/SleepForm';
+
+import SignUp from './components/SignUp';
+import LogIn from './components/LogIn';
+import SleepOverview from './components/sleeps/SleepOverview.js';
+import SleepView from './components/sleeps/SleepView';
+import DreamOverview from './components/dreams/DreamOverview.js';
+
+
+class App extends React.Component {
+  componentDidMount() {
+    this.props.getUser();
+  }
+
+  render() {
+    return (
+      <ConnectedRouter history={history}>
+        <>
+          <Logo />
+          <NavBar />
+          <Switch>
+            <Route exact path='/' component={Splash} />
+            <Route exact path='/sleeps' component={SleepOverview} />
+            <Route exact path='/sleeps/:sleepId' component={SleepView} />
+            <Route exact path='/dreams' component={DreamOverview} />
+            <Route exact path='/newsleep' component={SleepForm} />
+            <Route exact path='/logout' component={LogOut} />
+            <Route exact path='/signup' component={SignUp} />
+            <Route exact path='/login' component={LogIn} />
+          </Switch>
+        </>
+      </ConnectedRouter>
+    );
+  }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  getUser: () => dispatch(getUser())
+})
+
+export default connect(null, mapDispatchToProps)(App);
