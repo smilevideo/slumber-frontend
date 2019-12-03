@@ -28,8 +28,6 @@ class SleepOverview extends React.Component {
                 const sleepStartDate = parse(`${sleep.start_day} ${sleep.start_time}`, 'yyyy-MM-dd HH:mm', new Date());
                 const sleepEndDate = parse(`${sleep.end_day} ${sleep.end_time}`, 'yyyy-MM-dd HH:mm', new Date());
 
-                console.log(this.state.selectedStartDate.toString().split(' ').slice(1, 4).join(' '))
-
                 return (
                     areIntervalsOverlapping(
                         { start: sleepStartDate, end: sleepEndDate },
@@ -37,15 +35,6 @@ class SleepOverview extends React.Component {
                     )
                 );
             });
-
-            //add start and end dates as JS date attributes to each sleep in selection
-            this.selectedSleeps = this.selectedSleeps.map(sleep => {
-                return ({
-                    ...sleep, 
-                    startDate: parse(`${sleep.start_day} ${sleep.start_time}`, 'yyyy-MM-dd HH:mm', new Date()),
-                    endDate: parse(`${sleep.end_day} ${sleep.end_time}`, 'yyyy-MM-dd HH:mm', new Date())
-                })
-            })
         }
 
         return (<React.Fragment>
@@ -79,12 +68,13 @@ class SleepOverview extends React.Component {
             ?
             <ol className='sleepList'>
                 {this.selectedSleeps.map(sleep => {
-                    const duration = `${Math.floor(Math.abs(differenceInMinutes(sleep.startDate, sleep.endDate)) / 60)}h 
-                        ${Math.abs(differenceInMinutes(sleep.startDate, sleep.endDate)) % 60}m`
-
                     return <li key={sleep.id}>
-                        <div><Link to={`sleeps/${sleep.id}`}>{`${sleep.start_day}, ${sleep.start_time} to ${sleep.end_day}, ${sleep.end_time}`}</Link></div>
-                        <div><strong>Total duration: </strong>{duration}</div>
+                        <div>
+                        <Link to={`sleeps/${sleep.id}`}>
+                            {`${format(sleep.startDate, 'eeee, MMMM do yyyy')}, ${sleep.start_time} to 
+                            ${format(sleep.endDate, 'eeee, MMMM do yyyy')}, ${sleep.end_time}:`}
+                        </Link></div>
+                        <div><strong>Total duration: </strong>{sleep.duration}</div>
                         <br />
                         <div>{`Rating: ${sleep.rating ? sleep.rating : 'N/A'}`}</div>
                         <br />
