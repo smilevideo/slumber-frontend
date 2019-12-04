@@ -7,7 +7,7 @@ import { getUser } from './actions/userActions';
 
 import Logo from './components/Logo';
 import NavBar from './components/NavBar';
-import Splash from './components/Splash';
+import Home from './components/Home';
 
 import LogOut from './components/LogOut';
 import SleepForm from './components/sleeps/SleepForm';
@@ -31,7 +31,7 @@ class App extends React.Component {
           <Logo />
           <NavBar />
           <Switch>
-            <Route exact path='/' component={Splash} />
+            <Route exact path='/' component={Home} />
             <Route exact path='/sleeps' component={SleepHistory} />
             <Route exact path='/sleeps/:sleepId' component={SleepView} />
             <Route exact path='/dreams' component={DreamOverview} />

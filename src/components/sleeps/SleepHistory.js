@@ -45,18 +45,18 @@ class SleepHistory extends React.Component {
             const selectedSleepTimeInMinutes = this.selectedSleeps.reduce((memo, sleep) => {
                 if (isBefore(sleep.startDate, this.state.selectedStartDate)) {
                     if (isAfter(sleep.endDate, this.state.selectedEndDate)) {
-                        return memo + Math.abs(differenceInMinutes(this.state.selectedStartDate, this.state.selectedEndDate));
+                        return memo + differenceInMinutes(this.state.selectedEndDate, this.state.selectedStartDate);
                     }
                     
                     else {
-                        return memo + Math.abs(differenceInMinutes(this.state.selectedStartDate, sleep.endDate));
+                        return memo + differenceInMinutes(this.state.selectedEndDate, sleep.startDate);
                     }
                 }
                 else if (isAfter(sleep.endDate, this.state.selectedEndDate)) {
-                    return memo + Math.abs(differenceInMinutes(sleep.startDate, this.state.selectedEndDate));
+                    return memo + differenceInMinutes(sleep.endDate, this.state.selectedStartDate);
                 }
                 else {
-                    return memo + Math.abs(differenceInMinutes(sleep.startDate, sleep.endDate))
+                    return memo + differenceInMinutes(sleep.endDate, sleep.startDate)
                 }
             }, 0)
             this.timeSleptInSelection = minutesToString(selectedSleepTimeInMinutes);
