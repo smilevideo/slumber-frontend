@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DreamForm from '../dreams/DreamForm';
+import { format } from 'date-fns';
 
 class SleepView extends React.Component {
     handleClick = event => {
@@ -18,10 +19,12 @@ class SleepView extends React.Component {
         return (<React.Fragment>
             {typeof(this.sleep) !== 'undefined' ? 
                 <>
-                <h2>Sleep from {`${this.sleep.start_day}, ${this.sleep.start_time}`} to {`${this.sleep.end_day}, ${this.sleep.end_time}`}</h2> 
-                <p><strong>Note: </strong>{this.sleep.note}</p>
-                <p><strong>Rating: </strong>{this.sleep.rating}</p>
-                
+                <h2>Sleep from {`${format(this.sleep.startDate, 'eeee, MMMM do yyyy')}, ${this.sleep.start_time} to 
+                            ${format(this.sleep.endDate, 'eeee, MMMM do yyyy')}, ${this.sleep.end_time}:`}</h2>                             
+                <p><strong>Total duration: </strong>{this.sleep.duration}</p>
+                <p>{`Rating: ${this.sleep.rating ? this.sleep.rating : 'N/A'}`}</p>
+                <p><span>Note: </span>{this.sleep.note ? this.sleep.note : 'N/A'}</p>
+
                 <h3>Dreams: </h3>
                 {this.props.addingDream ? <DreamForm sleepId={this.sleep.id} /> : <button onClick={this.handleClick}>Add Dream</button>}
                 <ol>

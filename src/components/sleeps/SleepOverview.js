@@ -5,12 +5,12 @@ import Calendar from 'react-calendar';
 import { parse, areIntervalsOverlapping, format, differenceInMinutes } from 'date-fns';
 
 class SleepOverview extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
 
         this.state = {
-            selectedStartDate: null,
-            selectedEndDate: null
+            selectedStartDate: new Date(),
+            selectedEndDate: new Date()
         };
     }
 
@@ -19,25 +19,21 @@ class SleepOverview extends React.Component {
             selectedStartDate: date[0],
             selectedEndDate: date[1]
         });
-        
     }
 
     render() {
-        if (this.props.sleeps && this.state.selectedEndDate) {
+        if (this.props.sleeps) {
             this.selectedSleeps = this.props.sleeps.filter(sleep => {
-                const sleepStartDate = parse(`${sleep.start_day} ${sleep.start_time}`, 'yyyy-MM-dd HH:mm', new Date());
-                const sleepEndDate = parse(`${sleep.end_day} ${sleep.end_time}`, 'yyyy-MM-dd HH:mm', new Date());
-
                 return (
                     areIntervalsOverlapping(
-                        { start: sleepStartDate, end: sleepEndDate },
+                        { start: sleep.startDate, end: sleep.endDate },
                         { start: this.state.selectedStartDate, end: this.state.selectedEndDate }
                     )
                 );
             });
         }
 
-        return (<React.Fragment>
+        return (<>
             <h2>Sleep Overview</h2>
             <Calendar
                 onChange={this.onChange}
@@ -48,8 +44,6 @@ class SleepOverview extends React.Component {
                 selectRange={true}
             />
 
-            {this.selectedSleeps ?
-            <>
             <h3>{
                 //check if start and end of range are the same day
                 this.state.selectedStartDate.toString().split(' ').slice(1, 4).join(' ')
@@ -63,36 +57,37 @@ class SleepOverview extends React.Component {
                     ${format(this.state.selectedEndDate, 'eeee, MMMM do yyyy')}
                     :`   
             }</h3>
-
-            {this.selectedSleeps.length > 0 
-            ?
-            <ol className='sleepList'>
-                {this.selectedSleeps.map(sleep => {
-                    return <li key={sleep.id}>
-                        <div>
-                        <Link to={`sleeps/${sleep.id}`}>
-                            {`${format(sleep.startDate, 'eeee, MMMM do yyyy')}, ${sleep.start_time} to 
-                            ${format(sleep.endDate, 'eeee, MMMM do yyyy')}, ${sleep.end_time}:`}
-                        </Link></div>
-                        <div><strong>Total duration: </strong>{sleep.duration}</div>
-                        <br />
-                        <div>{`Rating: ${sleep.rating ? sleep.rating : 'N/A'}`}</div>
-                        <br />
-                        <div><span>Note: </span>{sleep.note ? sleep.note : 'N/A'}</div>
-                        <br />
-                        <div><span>Dream(s) Recorded?: </span>{sleep.dreams.length > 0 ? 'Yes' : 'No'}</div>
-                    </li>
-                })}
-            </ol>
-            :
-            <p>No sleep recorded for this period.</p>
-            }
+            
+            {this.selectedSleeps ?
+            <>
+                {this.selectedSleeps.length > 0 
+                ?
+                <ol className='sleepList'>
+                    {this.selectedSleeps.map(sleep => {
+                        return <li key={sleep.id}>
+                            <div>
+                            <Link to={`sleeps/${sleep.id}`}>
+                                {`${format(sleep.startDate, 'eeee, MMMM do yyyy')}, ${sleep.start_time} to 
+                                ${format(sleep.endDate, 'eeee, MMMM do yyyy')}, ${sleep.end_time}:`}
+                            </Link></div>
+                            <div><strong>Total duration: </strong>{sleep.duration}</div>
+                            <br />
+                            <div>{`Rating: ${sleep.rating ? sleep.rating : 'N/A'}`}</div>
+                            <br />
+                            <div><span>Note: </span>{sleep.note ? sleep.note : 'N/A'}</div>
+                            <br />
+                            <div><span>Dream(s) Recorded?: </span>{sleep.dreams.length > 0 ? 'Yes' : 'No'}</div>
+                        </li>
+                    })}
+                </ol>
+                :
+                <p>No sleep recorded for this period.</p>
+                }
             </>
             :
-            <h3>Please select a date range in the calendar above.</h3>
-            }
-            
-        </React.Fragment>)
+            null
+            }  
+        </>)
     }
 };
 
