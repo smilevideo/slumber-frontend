@@ -12,7 +12,7 @@ import {
 } from 'date-fns';
 import { minutesToString } from '../../helperFunctions';
 
-class SleepOverview extends React.Component {
+class SleepHistory extends React.Component {
     constructor() {
         super();
 
@@ -138,4 +138,4 @@ const mapDispatchToProps = dispatch => ({
     
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SleepOverview);
+export default connect(mapStateToProps, mapDispatchToProps)(SleepHistory);

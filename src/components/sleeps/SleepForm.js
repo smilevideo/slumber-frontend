@@ -90,6 +90,7 @@ class SleepForm extends React.Component {
                                     name='end_day'
                                     placeholder='End Day'
                                     min={this.state.start_day}
+                                    max={this.today}
                                     value={this.state.end_day}
                                     onChange={this.handleChange}
                                 /> 

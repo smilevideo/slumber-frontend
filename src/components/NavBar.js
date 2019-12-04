@@ -40,7 +40,7 @@ class NavBar extends React.Component {
                     activeStyle={{
                         background: 'darkblue'
                     }}
-                >Sleep Overview</NavLink>
+                >Sleep History</NavLink>
 
                 <NavLink
                     to='/newsleep'

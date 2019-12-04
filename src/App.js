@@ -14,7 +14,7 @@ import SleepForm from './components/sleeps/SleepForm';
 
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
-import SleepOverview from './components/sleeps/SleepOverview.js';
+import SleepHistory from './components/sleeps/SleepHistory';
 import SleepView from './components/sleeps/SleepView';
 import DreamOverview from './components/dreams/DreamOverview.js';
 
@@ -32,7 +32,7 @@ class App extends React.Component {
           <NavBar />
           <Switch>
             <Route exact path='/' component={Splash} />
-            <Route exact path='/sleeps' component={SleepOverview} />
+            <Route exact path='/sleeps' component={SleepHistory} />
             <Route exact path='/sleeps/:sleepId' component={SleepView} />
             <Route exact path='/dreams' component={DreamOverview} />
             <Route exact path='/newsleep' component={SleepForm} />
