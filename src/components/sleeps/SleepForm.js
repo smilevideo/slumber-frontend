@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createSleep } from '../../actions/userActions';
+import { format } from 'date-fns';
 
 class SleepForm extends React.Component {
     constructor() {
@@ -29,6 +30,19 @@ class SleepForm extends React.Component {
     }
 
     render() {
+        //set today's date as formatted string to set max value of sleep's start date
+        const today = new Date();
+        let dd = today.getDate();
+        let mm = today.getMonth() + 1; //January is 0!
+        const yyyy = today.getFullYear();
+        if(dd < 10){
+            dd = '0' + dd
+        } 
+        if(mm < 10){
+            mm = '0' + mm
+        } 
+        this.today = `${yyyy}-${mm}-${dd}`;
+
         return (<React.Fragment>
             <h2>New Sleep Entry</h2>
 
@@ -55,9 +69,10 @@ class SleepForm extends React.Component {
                                     type='date'
                                     name='start_day'
                                     placeholder='Start Day'
+                                    max={this.today}
                                     value={this.state.start_day}
                                     onChange={this.handleChange}
-                                /> 
+                                />
                             </td>
                             <td>
                                 <input

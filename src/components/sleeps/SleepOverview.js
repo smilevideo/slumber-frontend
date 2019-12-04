@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
-import { parse, areIntervalsOverlapping, format, differenceInMinutes } from 'date-fns';
+import { areIntervalsOverlapping, format, differenceInMinutes } from 'date-fns';
 
 class SleepOverview extends React.Component {
     constructor() {
@@ -31,6 +31,10 @@ class SleepOverview extends React.Component {
                     )
                 );
             });
+            this.selectedSleepTimeInMinutes = this.selectedSleeps.reduce((memo, sleep) => {
+                return memo + Math.abs(differenceInMinutes(sleep.startDate, sleep.endDate))
+            }, 0)
+            console.log(this.selectedSleepTimeInMinutes);
         }
 
         return (<>
@@ -76,7 +80,7 @@ class SleepOverview extends React.Component {
                             <br />
                             <div><span>Note: </span>{sleep.note ? sleep.note : 'N/A'}</div>
                             <br />
-                            <div><span>Dream(s) Recorded?: </span>{sleep.dreams.length > 0 ? 'Yes' : 'No'}</div>
+                            <div><span>Dream(s) recorded: </span>{sleep.dreams.length > 0 ? 'Yes' : 'No'}</div>
                         </li>
                     })}
                 </ol>

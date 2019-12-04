@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { format } from 'date-fns';
 
 class DreamOverview extends React.Component {
     render() {
-        const { match } = this.props
-        return (<React.Fragment>
+        return (<>
             <h2>Dream Overview</h2>
             {this.props.sleeps ?
             <ol className='dreamList'>
@@ -13,7 +13,12 @@ class DreamOverview extends React.Component {
                     return <div key={sleep.id}>
                         {sleep.dreams.map(dream => {
                             return (<li key={dream.id}>
-                                {dream.description}
+                                <Link to={`sleeps/${sleep.id}`}>
+                                {format(sleep.startDate, 'eeee, MMMM do yyyy')}
+                                </Link>
+                                <br />
+                                <p>{dream.description}</p>
+                                <p>{`Mood: ${dream.mood}`}</p>
                             </li>)
                         })}
                     </div>
@@ -21,8 +26,7 @@ class DreamOverview extends React.Component {
             </ol> :
             null
             }
-            
-        </React.Fragment>)
+        </>)
     }
 };
 
