@@ -53,9 +53,9 @@ class SleepForm extends React.Component {
                     <tbody>
                         <tr>
                             <th>Start Day</th>
-                            <th>Start Time</th>
+                            <th>Start Time (24hr)</th>
                             <th>End Day</th>
-                            <th>End Time</th>
+                            <th>End Time (24hr)</th>
                         </tr>
                         <tr>
                             <td>
