@@ -2,7 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
-import { areIntervalsOverlapping, format, differenceInMinutes } from 'date-fns';
+import { 
+    areIntervalsOverlapping, 
+    format, 
+    differenceInMinutes,
+    isBefore,
+    isAfter,
+    differenceInCalendarDays
+} from 'date-fns';
+import { minutesToString } from '../../helperFunctions';
 
 class SleepOverview extends React.Component {
     constructor() {
@@ -23,6 +31,7 @@ class SleepOverview extends React.Component {
 
     render() {
         if (this.props.sleeps) {
+            //set array of sleeps with any time in the selected range
             this.selectedSleeps = this.props.sleeps.filter(sleep => {
                 return (
                     areIntervalsOverlapping(
@@ -31,10 +40,30 @@ class SleepOverview extends React.Component {
                     )
                 );
             });
-            this.selectedSleepTimeInMinutes = this.selectedSleeps.reduce((memo, sleep) => {
-                return memo + Math.abs(differenceInMinutes(sleep.startDate, sleep.endDate))
+
+            //calculate total time slept in the selected range
+            const selectedSleepTimeInMinutes = this.selectedSleeps.reduce((memo, sleep) => {
+                if (isBefore(sleep.startDate, this.state.selectedStartDate)) {
+                    if (isAfter(sleep.endDate, this.state.selectedEndDate)) {
+                        return memo + Math.abs(differenceInMinutes(this.state.selectedStartDate, this.state.selectedEndDate));
+                    }
+                    
+                    else {
+                        return memo + Math.abs(differenceInMinutes(this.state.selectedStartDate, sleep.endDate));
+                    }
+                }
+                else if (isAfter(sleep.endDate, this.state.selectedEndDate)) {
+                    return memo + Math.abs(differenceInMinutes(sleep.startDate, this.state.selectedEndDate));
+                }
+                else {
+                    return memo + Math.abs(differenceInMinutes(sleep.startDate, sleep.endDate))
+                }
             }, 0)
-            console.log(this.selectedSleepTimeInMinutes);
+            this.timeSleptInSelection = minutesToString(selectedSleepTimeInMinutes);
+
+            //calculate average time slept per day
+            const daysInInterval = differenceInCalendarDays(this.state.selectedEndDate, this.state.selectedStartDate) + 1;
+            this.averageTimeSleptPerDay = minutesToString(Math.floor(selectedSleepTimeInMinutes / daysInInterval));
         }
 
         return (<>
@@ -66,24 +95,28 @@ class SleepOverview extends React.Component {
             <>
                 {this.selectedSleeps.length > 0 
                 ?
-                <ol className='sleepList'>
-                    {this.selectedSleeps.map(sleep => {
-                        return <li key={sleep.id}>
-                            <div>
-                            <Link to={`sleeps/${sleep.id}`}>
-                                {`${format(sleep.startDate, 'eeee, MMMM do yyyy')}, ${sleep.start_time} to 
-                                ${format(sleep.endDate, 'eeee, MMMM do yyyy')}, ${sleep.end_time}:`}
-                            </Link></div>
-                            <div><strong>Total duration: </strong>{sleep.duration}</div>
-                            <br />
-                            <div>{`Rating: ${sleep.rating ? sleep.rating : 'N/A'}`}</div>
-                            <br />
-                            <div><span>Note: </span>{sleep.note ? sleep.note : 'N/A'}</div>
-                            <br />
-                            <div><span>Dream(s) recorded: </span>{sleep.dreams.length > 0 ? 'Yes' : 'No'}</div>
-                        </li>
-                    })}
-                </ol>
+                <>
+                    <h4>Average time slept per day: {this.averageTimeSleptPerDay}</h4>
+                    <h4>Total time slept: {this.timeSleptInSelection}</h4>
+                    <ol className='sleepList'>
+                        {this.selectedSleeps.map(sleep => {
+                            return <li key={sleep.id}>
+                                <div>
+                                <Link to={`sleeps/${sleep.id}`}>
+                                    {`${format(sleep.startDate, 'eeee, MMMM do yyyy')}, ${sleep.start_time} to 
+                                    ${format(sleep.endDate, 'eeee, MMMM do yyyy')}, ${sleep.end_time}:`}
+                                </Link></div>
+                                <div><strong>Sleep duration: </strong>{sleep.duration}</div>
+                                <br />
+                                <div>{`Rating: ${sleep.rating ? sleep.rating : 'N/A'}`}</div>
+                                <br />
+                                <div><span>Note: </span>{sleep.note ? sleep.note : 'N/A'}</div>
+                                <br />
+                                <div><span>Dream(s) recorded: </span>{sleep.dreams.length > 0 ? 'Yes' : 'No'}</div>
+                            </li>
+                        })}
+                    </ol>
+                </>
                 :
                 <p>No sleep recorded for this period.</p>
                 }

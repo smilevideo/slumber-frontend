@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createSleep } from '../../actions/userActions';
-import { format } from 'date-fns';
 
 class SleepForm extends React.Component {
     constructor() {
