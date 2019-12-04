@@ -8,15 +8,7 @@ import {
     areIntervalsOverlapping,
     differenceInMinutes
 } from 'date-fns';
-import {
-    BarChart,
-    CartesianGrid,
-    XAxis,
-    YAxis,
-    Bar,
-    Label,
-    LabelList
-} from 'recharts';
+import RenderBarChart from './RenderBarChart';
 
 class Home extends React.Component {
     constructor() {
@@ -27,7 +19,7 @@ class Home extends React.Component {
         const today = new Date();
         for(let i = 0; i < 7; i++) {
             const date = subDays(today, 7 - i);
-            const string = format(date, 'eeee, MMMM do yyyy')
+            const string = format(date, 'eeee, MMMM do')
             this.pastSevenDays.push({ date, string });
         };
     }
@@ -80,26 +72,7 @@ class Home extends React.Component {
                 ?
                 <> 
                 <p>Welcome, {this.props.currentUser.username}.</p>
-                <BarChart 
-                    width={1030} 
-                    height={250} 
-                    data={this.pastSevenDays} 
-                    margin={{ top: 20, right: 30, left: 20, bottom: 10 }}   
-                >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="string" />
-                    <YAxis>
-                        <Label value='Hours Slept' angle='-90' position='insideLeft' />
-                    </YAxis>
-                    <Bar dataKey="timeSleptInHours" fill="#8884d8">
-                        <LabelList dataKey="timeSleptInHours" position="top" />
-                    </Bar>
-                </BarChart>
-                <ol>
-                {this.pastSevenDays.map(day => {
-                    return (<li key={day.string}>{`Hours slept on ${day.string}: ${day.timeSleptInHours}`}</li>)
-                })}
-                </ol>
+                <RenderBarChart period='week' data={this.pastSevenDays} />
                 </>
                 :
                 <p>Welcome, please sign up or log in.</p>
