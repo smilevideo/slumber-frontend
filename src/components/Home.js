@@ -8,6 +8,15 @@ import {
     areIntervalsOverlapping,
     differenceInMinutes
 } from 'date-fns';
+import {
+    BarChart,
+    CartesianGrid,
+    XAxis,
+    YAxis,
+    Bar,
+    Label,
+    LabelList
+} from 'recharts';
 
 class Home extends React.Component {
     constructor() {
@@ -34,7 +43,7 @@ class Home extends React.Component {
             })
 
             for(let i = 0; i < 7; i++) {
-                this.pastSevenDays[i].timeSlept = 0;
+                this.pastSevenDays[i].timeSleptInMinutes = 0;
 
                 relevantSleeps.forEach(sleep => {
                     const dayStart = startOfDay(this.pastSevenDays[i].date);
@@ -45,20 +54,22 @@ class Home extends React.Component {
                     )) {
                         if (sleep.startDate < dayStart) {
                             if (sleep.endDate > dayEnd) {
-                                this.pastSevenDays[i].timeSlept += 1440;
+                                this.pastSevenDays[i].timeSleptInMinutes += 1440;
                             }
                             else {
-                                this.pastSevenDays[i].timeSlept += differenceInMinutes(sleep.endDate, dayStart);
+                                this.pastSevenDays[i].timeSleptInMinutes += differenceInMinutes(sleep.endDate, dayStart);
                             }
                         }
                         else if (sleep.endDate > dayEnd) {
-                            this.pastSevenDays[i].timeSlept += differenceInMinutes(dayEnd, sleep.startDate);
+                            this.pastSevenDays[i].timeSleptInMinutes += differenceInMinutes(dayEnd, sleep.startDate);
                         }
                         else {
-                            this.pastSevenDays[i].timeSlept += differenceInMinutes(sleep.endDate, sleep.startDate);
+                            this.pastSevenDays[i].timeSleptInMinutes += differenceInMinutes(sleep.endDate, sleep.startDate);
                         }
                     }
                 })
+                
+                this.pastSevenDays[i].timeSleptInHours = Math.round((this.pastSevenDays[i].timeSleptInMinutes / 60) * 10) / 10;
             }
         }
 
@@ -69,9 +80,24 @@ class Home extends React.Component {
                 ?
                 <> 
                 <p>Welcome, {this.props.currentUser.username}.</p>
+                <BarChart 
+                    width={1030} 
+                    height={250} 
+                    data={this.pastSevenDays} 
+                    margin={{ top: 20, right: 30, left: 20, bottom: 10 }}   
+                >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="string" />
+                    <YAxis>
+                        <Label value='Hours Slept' angle='-90' position='insideLeft' />
+                    </YAxis>
+                    <Bar dataKey="timeSleptInHours" fill="#8884d8">
+                        <LabelList dataKey="timeSleptInHours" position="top" />
+                    </Bar>
+                </BarChart>
                 <ol>
                 {this.pastSevenDays.map(day => {
-                    return (<li key={day.string}>{`Minutes slept on ${day.string}: ${day.timeSlept}`}</li>)
+                    return (<li key={day.string}>{`Hours slept on ${day.string}: ${day.timeSleptInHours}`}</li>)
                 })}
                 </ol>
                 </>
