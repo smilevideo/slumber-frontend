@@ -1,3 +1,5 @@
+import { parse, differenceInMinutes } from 'date-fns';
+
 const initialState = {
     currentUser: {}
 }
@@ -35,7 +37,24 @@ export default (state = initialState, action) => {
         case 'LOGIN_USER':
             return {
                 ...state,
-                currentUser: action.payload,
+                //Add duration and js date variable versions of begin and end dates as attributes to sleeps array
+                currentUser: {
+                    ...action.payload,
+                    sleeps: [
+                        ...action.payload.sleeps.map(sleep => {
+                            const startDate = parse(`${sleep.start_day} ${sleep.start_time}`, 'yyyy-MM-dd HH:mm', new Date())
+                            const endDate = parse(`${sleep.end_day} ${sleep.end_time}`, 'yyyy-MM-dd HH:mm', new Date())
+                            
+                            return ({
+                                ...sleep,
+                                startDate,
+                                endDate,
+                                duration: `${Math.floor(Math.abs(differenceInMinutes(startDate, endDate)) / 60)}h 
+                                    ${Math.abs(differenceInMinutes(startDate, endDate)) % 60}m`
+                            })
+                        })
+                    ]
+                },
                 creatingUser: false,
                 loggingIn: false,
                 signUpError: false,
