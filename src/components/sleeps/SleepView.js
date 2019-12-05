@@ -16,7 +16,7 @@ class SleepView extends React.Component {
             })
         }
 
-        return (<React.Fragment>
+        return (<div className='main'>
             {typeof(this.sleep) !== 'undefined' ? 
                 <>
                 <h2>Sleep from {`${format(this.sleep.startDate, 'eeee, MMMM do yyyy')}, ${this.sleep.start_time} to 
@@ -37,7 +37,7 @@ class SleepView extends React.Component {
                 </ol>
                 </>
             : null} 
-        </React.Fragment>)
+        </div>)
         
     }
 };

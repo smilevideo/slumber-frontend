@@ -9,11 +9,11 @@ class LogOut extends React.Component {
     }
 
     render() {
-        return (<React.Fragment>
+        return (<div className='main'>
             <h2>Log Out</h2>
             <p>Are you sure you wish to log out?</p>
             <button onClick={this.handleClick}>Log Out</button>
-        </React.Fragment>)
+        </div>)
     }
 }
 

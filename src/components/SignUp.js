@@ -25,7 +25,7 @@ class SignUp extends React.Component {
     }
 
     render() {
-        return (<React.Fragment>
+        return (<div className='main'>
             <h2>Create an Account</h2>
 
             {this.props.creatingUser ? <p>Creating User..</p> : null}
@@ -66,7 +66,7 @@ class SignUp extends React.Component {
                     </tbody>
                 </table>
             </form>
-        </React.Fragment>)
+        </div>)
     }
 };
 

@@ -65,7 +65,7 @@ class Home extends React.Component {
             }
         }
 
-        return (<div>
+        return (<div className='main'>
             <h2>Home</h2>
             {
                 this.props.currentUser.username 

@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 
 class DreamOverview extends React.Component {
     render() {
-        return (<>
+        return (<div className='main'>
             <h2>Dream Overview</h2>
             {this.props.sleeps ?
             <ol className='dreamList'>
@@ -26,7 +26,7 @@ class DreamOverview extends React.Component {
             </ol> :
             null
             }
-        </>)
+        </div>)
     }
 };
 

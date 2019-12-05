@@ -42,7 +42,7 @@ class SleepForm extends React.Component {
         } 
         this.today = `${yyyy}-${mm}-${dd}`;
 
-        return (<React.Fragment>
+        return (<div className='main'>
             <h2>New Sleep Entry</h2>
 
             {this.props.creatingSleep ? <p>Adding Sleep..</p> : null}
@@ -133,7 +133,7 @@ class SleepForm extends React.Component {
 
                 <input type='submit' value='Add Sleep'/> 
             </form>
-        </React.Fragment>)
+        </div>)
     }
 };
 

@@ -25,7 +25,7 @@ class LogIn extends React.Component {
     }
 
     render() {
-        return (<React.Fragment>
+        return (<div className='main'>
             <h2>Login</h2>
             
             {this.props.loggingIn ? <p>Logging In..</p> : null}
@@ -66,7 +66,7 @@ class LogIn extends React.Component {
                     </tbody>
                 </table>
             </form>
-        </React.Fragment>)
+        </div>)
     }
 };
 

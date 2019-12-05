@@ -10,3 +10,8 @@ body {
   color: rgb(47, 227, 240);
   margin: 0px;
 }
+
+/* non-navbar */
+.main {
+  margin: 15px;
+}

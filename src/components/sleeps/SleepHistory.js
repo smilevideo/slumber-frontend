@@ -68,7 +68,7 @@ class SleepHistory extends React.Component {
             this.averageTimeSleptPerDay = minutesToString(Math.floor(selectedSleepTimeInMinutes / daysInInterval));
         }
 
-        return (<>
+        return (<div className='main'>
             <h2>Sleep Overview</h2>
             <Calendar
                 onChange={this.onChange}
@@ -126,7 +126,7 @@ class SleepHistory extends React.Component {
             :
             null
             }  
-        </>)
+        </div>)
     }
 };
 
