@@ -6,9 +6,9 @@ import { format } from 'date-fns';
 class DreamOverview extends React.Component {
     render() {
         return (<div className='main'>
-            <h2>Dream Overview</h2>
+            <h2 className='header'>Dream Overview</h2>
             {this.props.sleeps ?
-            <ol className='dreamList'>
+            <ol className='dream-list'>
                 {this.props.sleeps.map(sleep => {
                     return <div key={sleep.id}>
                         {sleep.dreams.map(dream => {

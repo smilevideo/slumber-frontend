@@ -10,7 +10,7 @@ class NavBar extends React.Component {
                 exact
                 activeClassName='navbar-chosen'
                 className='navbar-list-item navbar-logo'
-            >Slumber</NavLink>
+            ><strong>Slumber</strong></NavLink>
 
             {this.props.currentUser.username ? 
             <>

@@ -1,6 +1,6 @@
 /* NavBar */
 
-.navbar {
+div.navbar {
     display: flex;
     background: rgb(2, 22, 26);
     justify-content: flex-start;
@@ -8,7 +8,7 @@
 }
 
 .navbar-logo {
-    font-size: 1.8em;
+    font-size: 1.65em;
     width: 12vw;
     order: -1;
 }
@@ -17,14 +17,14 @@
     width: 40vw;
     order: 1;
     border-style: none inset inset none;
-    border-color: rgb(122, 135, 255);
+    border-color: rgb(57, 69, 182);
 }
 
 .navbar-flex-filler-loggedout {
     width: 70vw;
     order: 1;
     border-style: none inset inset none;
-    border-color: rgb(122, 135, 255);
+    border-color: rgb(57, 69, 182);
 }
 
 .navbar-logout, .navbar-login {
@@ -39,7 +39,8 @@
 .navbar a {
     height: 40px;
     line-height: 40px;
-    color: rgb(122, 135, 255);
+    color: rgb(179, 212, 255);
+    border-color: rgb(57, 69, 182);
     padding: 12px;
     margin: 0px;
     text-decoration: none;
@@ -49,7 +50,7 @@
 }
 
 .navbar-list-item.navbar-chosen {
-    border-bottom: 3px inset #F14B31;
+    border-bottom: 3px inset rgb(162, 0, 236);
 }
 
 .navbar-list-item:hover {

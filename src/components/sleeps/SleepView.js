@@ -19,7 +19,7 @@ class SleepView extends React.Component {
         return (<div className='main'>
             {typeof(this.sleep) !== 'undefined' ? 
                 <>
-                <h2>Sleep from {`${format(this.sleep.startDate, 'eeee, MMMM do yyyy')}, ${this.sleep.start_time} to 
+                <h2 className='header'>Sleep from {`${format(this.sleep.startDate, 'eeee, MMMM do yyyy')}, ${this.sleep.start_time} to 
                             ${format(this.sleep.endDate, 'eeee, MMMM do yyyy')}, ${this.sleep.end_time}:`}</h2>                             
                 <p><strong>Total duration: </strong>{this.sleep.duration}</p>
                 <p>{`Rating: ${this.sleep.rating ? this.sleep.rating : 'N/A'}`}</p>

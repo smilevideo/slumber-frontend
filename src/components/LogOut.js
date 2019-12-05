@@ -10,7 +10,7 @@ class LogOut extends React.Component {
 
     render() {
         return (<div className='main'>
-            <h2>Log Out</h2>
+            <h2 className='header'>Log Out</h2>
             <p>Are you sure you wish to log out?</p>
             <button onClick={this.handleClick}>Log Out</button>
         </div>)

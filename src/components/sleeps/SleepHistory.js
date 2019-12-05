@@ -69,7 +69,8 @@ class SleepHistory extends React.Component {
         }
 
         return (<div className='main'>
-            <h2>Sleep Overview</h2>
+            <h2 className='header'>Sleep Overview</h2>
+            <p style={{textAlign: 'center'}}>Select a date range:</p>
             <Calendar
                 onChange={this.onChange}
                 value={[this.state.selectedStartDate, this.state.selectedEndDate]}
@@ -79,7 +80,7 @@ class SleepHistory extends React.Component {
                 selectRange={true}
             />
 
-            <h3>{
+            <h3 style={{textAlign: 'center'}}>{
                 //check if start and end of range are the same day
                 this.state.selectedStartDate.toString().split(' ').slice(1, 4).join(' ')
                     ===
@@ -89,8 +90,7 @@ class SleepHistory extends React.Component {
                 :
                 `${format(this.state.selectedStartDate, 'eeee, MMMM do yyyy')}
                     to 
-                    ${format(this.state.selectedEndDate, 'eeee, MMMM do yyyy')}
-                    :`   
+                    ${format(this.state.selectedEndDate, 'eeee, MMMM do yyyy')}:`   
             }</h3>
             
             {this.selectedSleeps ?
@@ -98,8 +98,8 @@ class SleepHistory extends React.Component {
                 {this.selectedSleeps.length > 0 
                 ?
                 <>
-                    <h4>Average time slept per day: {this.averageTimeSleptPerDay}</h4>
-                    <h4>Total time slept: {this.timeSleptInSelection}</h4>
+                    <p style={{textAlign: 'center'}}>Average time slept per day: {this.averageTimeSleptPerDay}</p>
+                    <p style={{textAlign: 'center'}}>Total time slept: {this.timeSleptInSelection}</p>
                     <ol className='sleepList'>
                         {this.selectedSleeps.map(sleep => {
                             return <li key={sleep.id}>
@@ -115,6 +115,7 @@ class SleepHistory extends React.Component {
                                 <div><span>Note: </span>{sleep.note ? sleep.note : 'N/A'}</div>
                                 <br />
                                 <div><span>Dream(s) recorded: </span>{sleep.dreams.length > 0 ? 'Yes' : 'No'}</div>
+                                <br />
                             </li>
                         })}
                     </ol>

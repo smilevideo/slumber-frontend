@@ -1,5 +1,13 @@
 /* Bar Chart */
 
-/* .recharts-rectangle {
-    fill: #4d4aa3
-} */
+div.recharts-wrapper {
+    margin: auto;
+}
+
+div.chart {
+    margin: auto;
+    border-style: inset;
+    height: 500px;
+    width: 800px;
+    background-color: rgb(24, 24, 24);
+}

@@ -5,7 +5,6 @@ import {
     XAxis, 
     YAxis, 
     Tooltip,
-    Legend, 
     LabelList, 
     Text
 } from 'recharts';
@@ -30,8 +29,8 @@ const CustomizedAxisTick = props => {
 const RenderBarChart = props => {
     const { data, period } = props;
 
-    return (<>
-        <p><strong>{`Hours slept in the past ${period}:`}</strong></p>
+    return (<div className='chart'>
+        <p style={{textAlign: "center"}}><strong>{`Hours Slept in the Past ${period}`}</strong></p>
 
         <BarChart 
             width={750} height={450}
@@ -42,12 +41,11 @@ const RenderBarChart = props => {
             <XAxis dataKey="string" interval={0} tick={<CustomizedAxisTick />} height={100} />
             <YAxis tick={{fill: 'lightblue'}} />
             <Tooltip />
-            {/* <Legend verticalAlign="top" wrapperStyle={{ lineHeight: '30px' }} /> */}
             <Bar fill='#4d4aa3' name='Hours Slept' dataKey="timeSleptInHours">
                 <LabelList dataKey="timeSleptInHours" position="top" fill='lightblue' />
             </Bar>
         </BarChart>
-    </>)
+    </div>)
 }
 
 export default RenderBarChart;

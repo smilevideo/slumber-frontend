@@ -5,7 +5,6 @@ import { history } from './index.js';
 import { connect } from 'react-redux';
 import { getUser } from './actions/userActions';
 
-import Logo from './components/Logo';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
 

@@ -1,5 +1,17 @@
-/* Sleep View */
+/** Sleep History **/
+
+/* Calendar */
+
+div.react-calendar {
+    margin: auto;
+}
+
+
+/** Sleep View **/
 
 .dream-description {
     white-space: pre-wrap;
 }
+
+
+/** Sleep Form **/

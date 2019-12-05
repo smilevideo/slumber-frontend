@@ -26,7 +26,7 @@ class SignUp extends React.Component {
 
     render() {
         return (<div className='main'>
-            <h2>Create an Account</h2>
+            <h2 className='header'>Create an Account</h2>
 
             {this.props.creatingUser ? <p>Creating User..</p> : null}
             {this.props.signUpError ? <p>Username already taken, try again.</p> : null}

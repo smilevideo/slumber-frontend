@@ -66,13 +66,14 @@ class Home extends React.Component {
         }
 
         return (<div className='main'>
-            <h2>Home</h2>
+            <h2 className='header'>Home</h2>
             {
                 this.props.currentUser.username 
                 ?
                 <> 
                 <p>Welcome, {this.props.currentUser.username}.</p>
-                <RenderBarChart period='week' data={this.pastSevenDays} />
+                <br />
+                <RenderBarChart period='Week' data={this.pastSevenDays} />
                 </>
                 :
                 <p>Welcome, please sign up or log in.</p>

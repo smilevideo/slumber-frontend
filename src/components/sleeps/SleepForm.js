@@ -43,12 +43,12 @@ class SleepForm extends React.Component {
         this.today = `${yyyy}-${mm}-${dd}`;
 
         return (<div className='main'>
-            <h2>New Sleep Entry</h2>
+            <h2 className='header'>New Sleep Entry</h2>
 
             {this.props.creatingSleep ? <p>Adding Sleep..</p> : null}
             {this.props.createSleepError ? <p>Error, try again.</p> : null}
 
-            <form onSubmit={this.handleSubmit}>
+            <form className='sleep-form' onSubmit={this.handleSubmit}>
                 <table>
                     <tbody>
                         <tr>
@@ -109,7 +109,7 @@ class SleepForm extends React.Component {
                         </tr>
                     </tbody>
                 </table><br />
-
+                
                 <label><strong>Note (optional):</strong></label><br />
                 <textarea
                     name='note'
@@ -118,8 +118,9 @@ class SleepForm extends React.Component {
                     rows='8'
                     value={this.state.note}
                     onChange={this.handleChange}
-                /><br /><br />
-
+                />
+                <br /><br />
+                
                 <label><strong>Rating (optional):</strong></label><br />
                 <input 
                     type='number'
@@ -129,8 +130,9 @@ class SleepForm extends React.Component {
                     placeholder='(1-5)'
                     value={this.state.rating}
                     onChange={this.handleChange}
-                /><br /><br />
-
+                />
+                <br /><br />
+                
                 <input type='submit' value='Add Sleep'/> 
             </form>
         </div>)

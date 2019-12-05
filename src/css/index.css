@@ -11,7 +11,16 @@ body {
   margin: 0px;
 }
 
+a {
+  color: hotpink;
+}
+
 /* non-navbar */
-.main {
-  margin: 15px;
+div.main {
+  margin: 10px;
+}
+
+/* header of each page */
+h2.header {
+  color: rgb(255, 168, 168);
 }

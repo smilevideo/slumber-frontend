@@ -26,7 +26,7 @@ class LogIn extends React.Component {
 
     render() {
         return (<div className='main'>
-            <h2>Login</h2>
+            <h2 className='header'>Login</h2>
             
             {this.props.loggingIn ? <p>Logging In..</p> : null}
             {this.props.logInError ? <p>Invalid username or password, try again.</p> : null}
