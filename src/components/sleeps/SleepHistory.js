@@ -100,21 +100,27 @@ class SleepHistory extends React.Component {
                 <>
                     <p style={{textAlign: 'center'}}>Average time slept per day: {this.averageTimeSleptPerDay}</p>
                     <p style={{textAlign: 'center'}}>Total time slept: {this.timeSleptInSelection}</p>
+                    <br />
+                    <hr className='sleep-list-begin'/>
+                    <h4>List of sleep sessions during this period:</h4>
                     <ol className='sleepList'>
                         {this.selectedSleeps.map(sleep => {
                             return <li key={sleep.id}>
                                 <div>
-                                <Link to={`sleeps/${sleep.id}`}>
-                                    {`${format(sleep.startDate, 'eeee, MMMM do yyyy')}, ${sleep.start_time} to 
-                                    ${format(sleep.endDate, 'eeee, MMMM do yyyy')}, ${sleep.end_time}:`}
-                                </Link></div>
+                                    <Link to={`sleeps/${sleep.id}`}>
+                                        {`${format(sleep.startDate, 'eeee, MMMM do yyyy')}, ${sleep.start_time} to 
+                                        ${format(sleep.endDate, 'eeee, MMMM do yyyy')}, ${sleep.end_time}:`}
+                                    </Link>
+                                </div>
                                 <div><strong>Sleep duration: </strong>{sleep.duration}</div>
                                 <br />
-                                <div>{`Rating: ${sleep.rating ? sleep.rating : 'N/A'}`}</div>
+                                <div className='sleep-note'><strong>Note(s): </strong><br />{sleep.note ? sleep.note : 'N/A'}</div>
                                 <br />
-                                <div><span>Note: </span>{sleep.note ? sleep.note : 'N/A'}</div>
+                                <div><strong>Rating: </strong>{sleep.rating ? sleep.rating : 'N/A'}</div>
                                 <br />
-                                <div><span>Dream(s) recorded: </span>{sleep.dreams.length > 0 ? 'Yes' : 'No'}</div>
+                                <div><strong>Dream(s) recorded: </strong>{sleep.dreams.length > 0 ? 'Yes' : 'No'}</div>
+                                <br />
+                                <hr />
                                 <br />
                             </li>
                         })}

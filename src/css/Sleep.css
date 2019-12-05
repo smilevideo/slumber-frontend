@@ -1,7 +1,15 @@
 /** Sleep History **/
 
-/* Calendar */
+div.sleep-note {
+    white-space: pre-wrap;
+}
 
+hr.sleep-list-begin {
+    border: 3px solid rgb(194, 194, 194);
+    border-radius: 5px;
+}
+
+/* Calendar */
 div.react-calendar {
     margin: auto;
 }

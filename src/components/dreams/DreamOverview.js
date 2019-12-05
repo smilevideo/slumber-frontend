@@ -13,12 +13,21 @@ class DreamOverview extends React.Component {
                     return <div key={sleep.id}>
                         {sleep.dreams.map(dream => {
                             return (<li key={dream.id}>
-                                <Link to={`sleeps/${sleep.id}`}>
-                                {format(sleep.startDate, 'eeee, MMMM do yyyy')}
-                                </Link>
-                                <br />
-                                <p className='dream-description'>{dream.description}</p>
-                                <p>{`Mood: ${dream.mood}`}</p>
+                                <p>
+                                    {'Day of associated sleep session: '}
+                                    <Link to={`sleeps/${sleep.id}`}>
+                                    {format(sleep.startDate, 'eeee, MMMM do yyyy')}
+                                    </Link>
+                                </p>
+                                <p className='dream-description'>
+                                    <strong>Description:</strong><br />
+                                    {dream.description}
+                                </p>
+                                <p>
+                                    <strong>Mood: </strong>
+                                    {dream.mood}
+                                </p>
+                                <hr />
                             </li>)
                         })}
                     </div>
