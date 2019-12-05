@@ -8,6 +8,7 @@ import {
     areIntervalsOverlapping,
     differenceInMinutes
 } from 'date-fns';
+import RenderBarChart from './RenderBarChart';
 
 class Home extends React.Component {
     constructor() {
@@ -18,7 +19,7 @@ class Home extends React.Component {
         const today = new Date();
         for(let i = 0; i < 7; i++) {
             const date = subDays(today, 7 - i);
-            const string = format(date, 'eeee, MMMM do yyyy')
+            const string = format(date, 'eeee, MMMM do')
             this.pastSevenDays.push({ date, string });
         };
     }
@@ -34,7 +35,7 @@ class Home extends React.Component {
             })
 
             for(let i = 0; i < 7; i++) {
-                this.pastSevenDays[i].timeSlept = 0;
+                this.pastSevenDays[i].timeSleptInMinutes = 0;
 
                 relevantSleeps.forEach(sleep => {
                     const dayStart = startOfDay(this.pastSevenDays[i].date);
@@ -45,20 +46,22 @@ class Home extends React.Component {
                     )) {
                         if (sleep.startDate < dayStart) {
                             if (sleep.endDate > dayEnd) {
-                                this.pastSevenDays[i].timeSlept += 1440;
+                                this.pastSevenDays[i].timeSleptInMinutes += 1440;
                             }
                             else {
-                                this.pastSevenDays[i].timeSlept += differenceInMinutes(sleep.endDate, dayStart);
+                                this.pastSevenDays[i].timeSleptInMinutes += differenceInMinutes(sleep.endDate, dayStart);
                             }
                         }
                         else if (sleep.endDate > dayEnd) {
-                            this.pastSevenDays[i].timeSlept += differenceInMinutes(dayEnd, sleep.startDate);
+                            this.pastSevenDays[i].timeSleptInMinutes += differenceInMinutes(dayEnd, sleep.startDate);
                         }
                         else {
-                            this.pastSevenDays[i].timeSlept += differenceInMinutes(sleep.endDate, sleep.startDate);
+                            this.pastSevenDays[i].timeSleptInMinutes += differenceInMinutes(sleep.endDate, sleep.startDate);
                         }
                     }
                 })
+                
+                this.pastSevenDays[i].timeSleptInHours = Math.round((this.pastSevenDays[i].timeSleptInMinutes / 60) * 10) / 10;
             }
         }
 
@@ -69,11 +72,7 @@ class Home extends React.Component {
                 ?
                 <> 
                 <p>Welcome, {this.props.currentUser.username}.</p>
-                <ol>
-                {this.pastSevenDays.map(day => {
-                    return (<li key={day.string}>{`Minutes slept on ${day.string}: ${day.timeSlept}`}</li>)
-                })}
-                </ol>
+                <RenderBarChart period='week' data={this.pastSevenDays} />
                 </>
                 :
                 <p>Welcome, please sign up or log in.</p>

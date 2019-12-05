@@ -49,8 +49,8 @@ export default (state = initialState, action) => {
                                 ...sleep,
                                 startDate,
                                 endDate,
-                                duration: `${Math.floor(Math.abs(differenceInMinutes(startDate, endDate)) / 60)}h 
-                                    ${Math.abs(differenceInMinutes(startDate, endDate)) % 60}m`
+                                duration: `${Math.floor(differenceInMinutes(endDate, startDate) / 60)}h 
+                                    ${differenceInMinutes(endDate, startDate) % 60}m`
                             })
                         })
                     ]

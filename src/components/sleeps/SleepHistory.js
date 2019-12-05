@@ -8,7 +8,8 @@ import {
     differenceInMinutes,
     isBefore,
     isAfter,
-    differenceInCalendarDays
+    differenceInCalendarDays,
+    subDays
 } from 'date-fns';
 import { minutesToString } from '../../helperFunctions';
 
@@ -17,8 +18,8 @@ class SleepHistory extends React.Component {
         super();
 
         this.state = {
-            selectedStartDate: new Date(),
-            selectedEndDate: new Date()
+            selectedStartDate: subDays(new Date(), 7),
+            selectedEndDate: subDays(new Date(), 1)
         };
     }
 
@@ -45,20 +46,21 @@ class SleepHistory extends React.Component {
             const selectedSleepTimeInMinutes = this.selectedSleeps.reduce((memo, sleep) => {
                 if (isBefore(sleep.startDate, this.state.selectedStartDate)) {
                     if (isAfter(sleep.endDate, this.state.selectedEndDate)) {
-                        return memo + differenceInMinutes(this.state.selectedEndDate, this.state.selectedStartDate);
+                        return memo + differenceInMinutes(this.state.selectedEndDate, this.state.selectedStartDate) + 1;
                     }
                     
                     else {
-                        return memo + differenceInMinutes(this.state.selectedEndDate, sleep.startDate);
+                        return memo + differenceInMinutes(sleep.endDate, this.state.selectedStartDate);
                     }
                 }
                 else if (isAfter(sleep.endDate, this.state.selectedEndDate)) {
-                    return memo + differenceInMinutes(sleep.endDate, this.state.selectedStartDate);
+                    return memo + differenceInMinutes(this.state.selectedEndDate, sleep.startDate) + 1;
                 }
                 else {
                     return memo + differenceInMinutes(sleep.endDate, sleep.startDate)
                 }
             }, 0)
+            console.log(selectedSleepTimeInMinutes);
             this.timeSleptInSelection = minutesToString(selectedSleepTimeInMinutes);
 
             //calculate average time slept per day

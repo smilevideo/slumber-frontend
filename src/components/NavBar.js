@@ -2,85 +2,64 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-const link = {
-    width: '100px',
-    padding: '12px',
-    margin: '0 6px 0px',
-    textDecoration: 'none',
-    color: 'white'
-}
-
 class NavBar extends React.Component {
     render() {
-        return (<div>
+        return (<div className='navbar'>
             <NavLink
                 to='/'
                 exact
-                style={{...link, background: 'black'}}
-                activeStyle={{
-                    background: 'darkblue'
-                }}
-            >Home</NavLink>
+                activeClassName='navbar-chosen'
+                className='navbar-list-item navbar-logo'
+            >Slumber</NavLink>
 
             {this.props.currentUser.username ? 
-            <span>
+            <>
+                <div className='navbar-flex-filler-loggedin' />
                 <NavLink
                     to='/logout'
                     exact
-                    style={{...link, background: 'purple'}}
-                    activeStyle={{
-                        background: 'darkblue'
-                    }}
+                    activeClassName='navbar-chosen'
+                    className='navbar-list-item navbar-logout'
                 >Log Out</NavLink>
 
                 <NavLink
                     to='/sleeps'
                     exact
-                    style={{...link, background: 'blue'}}
-                    activeStyle={{
-                        background: 'darkblue'
-                    }}
+                    activeClassName='navbar-chosen'
+                    className='navbar-list-item'
                 >Sleep History</NavLink>
 
                 <NavLink
                     to='/newsleep'
                     exact
-                    style={{...link, background: 'blue'}}
-                    activeStyle={{
-                        background: 'darkblue'
-                    }}
+                    activeClassName='navbar-chosen'
+                    className='navbar-list-item'
                 >Record Sleep</NavLink>
 
                 <NavLink
                     to='/dreams'
                     exact
-                    style={{...link, background: 'blue'}}
-                    activeStyle={{
-                        background: 'darkblue'
-                    }}
+                    activeClassName='navbar-chosen'
+                    className='navbar-list-item'
                 >Dream List</NavLink>
-
-            </span> 
+            </>
             :
-            <span>
+            <>
+                <div className='navbar-flex-filler-loggedout' />
                 <NavLink
                     to='/signup'
                     exact
-                    style={{...link, background: 'purple'}}
-                    activeStyle={{
-                        background: 'darkblue'
-                    }}
+                    activeClassName='navbar-chosen'
+                    className='navbar-list-item'
                 >Sign Up</NavLink>
                 
                 <NavLink
                     to='/login'
                     exact
-                    style={{...link, background: 'purple'}}
-                    activeStyle={{
-                        background: 'darkblue'
-                    }}
+                    activeClassName='navbar-chosen'
+                    className='navbar-list-item navbar-login'
                 >Log In</NavLink>
-            </span>}
+            </>}
         </div>)
     }
 }
