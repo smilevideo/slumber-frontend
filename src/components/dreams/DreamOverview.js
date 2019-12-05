@@ -17,7 +17,7 @@ class DreamOverview extends React.Component {
                                 {format(sleep.startDate, 'eeee, MMMM do yyyy')}
                                 </Link>
                                 <br />
-                                <p>{dream.description}</p>
+                                <p className='dream-description'>{dream.description}</p>
                                 <p>{`Mood: ${dream.mood}`}</p>
                             </li>)
                         })}

@@ -8,16 +8,18 @@ class NavBar extends React.Component {
             <NavLink
                 to='/'
                 exact
-                className='navbar-logo'
+                activeClassName='navbar-chosen'
+                className='navbar-list-item navbar-logo'
             >Slumber</NavLink>
 
             {this.props.currentUser.username ? 
             <>
+                <div className='navbar-flex-filler-loggedin' />
                 <NavLink
                     to='/logout'
                     exact
                     activeClassName='navbar-chosen'
-                    className='navbar-list-item'
+                    className='navbar-list-item navbar-logout'
                 >Log Out</NavLink>
 
                 <NavLink
@@ -43,6 +45,7 @@ class NavBar extends React.Component {
             </>
             :
             <>
+                <div className='navbar-flex-filler-loggedout' />
                 <NavLink
                     to='/signup'
                     exact
@@ -54,7 +57,7 @@ class NavBar extends React.Component {
                     to='/login'
                     exact
                     activeClassName='navbar-chosen'
-                    className='navbar-list-item'
+                    className='navbar-list-item navbar-login'
                 >Log In</NavLink>
             </>}
         </div>)

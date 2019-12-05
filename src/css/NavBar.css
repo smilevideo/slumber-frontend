@@ -1,0 +1,57 @@
+/* NavBar */
+
+.navbar {
+    display: flex;
+    background: rgb(2, 22, 26);
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.navbar-logo {
+    font-size: 1.8em;
+    width: 12vw;
+    order: -1;
+}
+
+.navbar-flex-filler-loggedin {
+    width: 40vw;
+    order: 1;
+    border-style: none inset inset none;
+    border-color: rgb(122, 135, 255);
+}
+
+.navbar-flex-filler-loggedout {
+    width: 70vw;
+    order: 1;
+    border-style: none inset inset none;
+    border-color: rgb(122, 135, 255);
+}
+
+.navbar-logout, .navbar-login {
+    order: 2;
+    justify-self: flex-end;
+}
+
+.navbar-list-item {
+    width: 12vw;
+}
+
+.navbar a {
+    height: 40px;
+    line-height: 40px;
+    color: rgb(122, 135, 255);
+    padding: 12px;
+    margin: 0px;
+    text-decoration: none;
+    border-style: none inset inset none;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.navbar-list-item.navbar-chosen {
+    border-bottom: 3px inset #F14B31;
+}
+
+.navbar-list-item:hover {
+    background: rgb(28, 51, 94);
+}
