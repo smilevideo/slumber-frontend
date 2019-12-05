@@ -28,7 +28,7 @@ class App extends React.Component {
     return (
       <ConnectedRouter history={history}>
         <>
-          <Logo />
+          {/* <Logo /> */}
           <NavBar />
           <Switch>
             <Route exact path='/' component={Home} />

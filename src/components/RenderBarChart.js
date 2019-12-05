@@ -20,6 +20,8 @@ const CustomizedAxisTick = props => {
             width={75} 
             textAnchor="middle" 
             verticalAnchor="start"
+            fill='lightblue'
+            
         >
             {payload.value}
         </Text>
@@ -39,11 +41,11 @@ const RenderBarChart = props => {
             barCategoryGap='0%'
         >
             <XAxis dataKey="string" interval={0} tick={<CustomizedAxisTick />} height={100} />
-            <YAxis />
+            <YAxis tick={{fill: 'lightblue'}} />
             <Tooltip />
             {/* <Legend verticalAlign="top" wrapperStyle={{ lineHeight: '30px' }} /> */}
             <Bar name='Hours Slept' dataKey="timeSleptInHours" fill="#7489ca">
-                <LabelList dataKey="timeSleptInHours" position="top" />
+                <LabelList dataKey="timeSleptInHours" position="top" fill='lightblue' />
             </Bar>
         </BarChart>
     </>)

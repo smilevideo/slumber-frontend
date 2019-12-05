@@ -18,8 +18,8 @@ class SleepHistory extends React.Component {
         super();
 
         this.state = {
-            selectedStartDate: subDays(new Date(), 6),
-            selectedEndDate: new Date()
+            selectedStartDate: subDays(new Date(), 7),
+            selectedEndDate: subDays(new Date(), 1)
         };
     }
 
