@@ -2,11 +2,11 @@
 React/Redux frontend for Slumber, a sleep log/dream diary/~~sleep-performance analytics~~ web app.
 Also makes use of the react-calendar and date-fns packages
 
-## Future Improvements:
+## to-do:
 - Move token from localStorage to an httpOnly cookie
 - Put API url in env variable or something for all action files to access
 - Separate out actions by model (user, sleep, etc.) -each one references getUser from user actions
 
-## Bugs to Fix: (will address once more base functionality is finished)
+## Known Bugs:
 - when refreshing while logged in, navbar momentarily shows the logged-out buttons
 - when moving to a different tab while there is an error message, the error message is still there upon return

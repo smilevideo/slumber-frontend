@@ -126,7 +126,6 @@ export const createSleep = (sleepParams) => {
             })
             .then(r => r.json())
             .then(data => {
-                console.log(data);
                 if (data.error) {
                     dispatch({ type: 'CREATE_SLEEP_ERROR' });
                 }

@@ -60,7 +60,6 @@ class SleepHistory extends React.Component {
                     return memo + differenceInMinutes(sleep.endDate, sleep.startDate)
                 }
             }, 0)
-            console.log(selectedSleepTimeInMinutes);
             this.timeSleptInSelection = minutesToString(selectedSleepTimeInMinutes);
 
             //calculate average time slept per day
