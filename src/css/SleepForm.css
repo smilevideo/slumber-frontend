@@ -17,3 +17,8 @@ td.dayForm {
 table, th, td {
     border: 1px solid rgb(128, 128, 128);
 }
+
+/* no changes atm */
+input[type=date] {
+    width: 100%;
+}

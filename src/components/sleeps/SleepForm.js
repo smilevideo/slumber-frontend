@@ -1,20 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createSleep } from '../../actions/userActions';
-import { format } from 'date-fns';
+import { 
+    format,
+    subDays
+} from 'date-fns';
 
 class SleepForm extends React.Component {
     constructor() {
         super()
 
+        //set today and yesterday's dates as formatted strings
+        this.today = format(new Date(), 'yyyy-MM-dd');
+        this.yesterday = format(subDays(new Date(), 1), 'yyyy-MM-dd');
+
         this.state = {
-            start_day: '',
+            start_day: this.yesterday,
             start_time: '',
-            end_day: '',
+            end_day: this.today,
             end_time: '',
             note: '',
             rating: '',
-            startDayOption: 'today'
+            startDayOption: 'yesterday',
+            endDayOption: 'today'
         }
     }
 
@@ -30,10 +38,31 @@ class SleepForm extends React.Component {
         this.props.createSleep(this.state);
     }
 
-    render() {
-        //set today's date as formatted string
-        this.today = format(new Date(), 'yyyy-MM-dd')
+    componentDidUpdate() {
+        if (this.state.startDayOption === 'today' && this.state.start_day !== this.today) {
+            this.setState({
+                start_day: this.today
+            })
+        }
+        else if (this.state.startDayOption ==='yesterday' && this.state.start_day !== this.yesterday) {
+            this.setState({
+                start_day: this.yesterday
+            })
+        }
+        
+        if (this.state.endDayOption === 'today' && this.state.end_day !== this.today) {
+            this.setState({
+                end_day: this.today
+            })
+        }
+        else if (this.state.endDayOption ==='yesterday' && this.state.end_day !== this.yesterday) {
+            this.setState({
+                end_day: this.yesterday
+            })
+        }
+    }
 
+    render() {
         return (<div className='main'>
             <h2 className='header'>New Sleep Entry</h2>
 
@@ -106,8 +135,41 @@ class SleepForm extends React.Component {
                                     onChange={this.handleChange}
                                 />
                             </td>
-                            <td>
-                                <input 
+                            <td className='dayForm'>
+                                <label className='form-radio'>
+                                    <input
+                                        type='radio'
+                                        name='endDayOption'
+                                        value='today'
+                                        checked={this.state.endDayOption === 'today'}
+                                        onChange={this.handleChange}
+                                        className='form-input-radio'
+                                    />
+                                    Today
+                                </label>
+                                <label className='form-radio'>
+                                    <input
+                                        type='radio'
+                                        name='endDayOption'
+                                        value='yesterday'
+                                        checked={this.state.endDayOption === 'yesterday'}
+                                        onChange={this.handleChange}
+                                        className='form-input-radio'
+                                    />
+                                    Yesterday
+                                </label>
+                                <label className='form-radio'>
+                                    <input
+                                        type='radio'
+                                        name='endDayOption'
+                                        value='other'
+                                        checked={this.state.endDayOption === 'other'}
+                                        onChange={this.handleChange}
+                                        className='form-input-radio'
+                                    />
+                                    Other
+                                </label>
+                                <input className='form-date'
                                     required
                                     type='date'
                                     name='end_day'
