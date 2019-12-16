@@ -21,8 +21,6 @@ class SleepForm extends React.Component {
             end_time: '',
             note: '',
             rating: '',
-            startDayOption: 'yesterday',
-            endDayOption: 'today'
         }
     }
 
@@ -36,30 +34,6 @@ class SleepForm extends React.Component {
         event.preventDefault();
 
         this.props.createSleep(this.state);
-    }
-
-    componentDidUpdate() {
-        if (this.state.startDayOption === 'today' && this.state.start_day !== this.today) {
-            this.setState({
-                start_day: this.today
-            })
-        }
-        else if (this.state.startDayOption ==='yesterday' && this.state.start_day !== this.yesterday) {
-            this.setState({
-                start_day: this.yesterday
-            })
-        }
-        
-        if (this.state.endDayOption === 'today' && this.state.end_day !== this.today) {
-            this.setState({
-                end_day: this.today
-            })
-        }
-        else if (this.state.endDayOption ==='yesterday' && this.state.end_day !== this.yesterday) {
-            this.setState({
-                end_day: this.yesterday
-            })
-        }
     }
 
     render() {
@@ -79,13 +53,14 @@ class SleepForm extends React.Component {
                             <th>End Time (24hr)</th>
                         </tr>
                         <tr>
+                            {/*** START DAY INPUT ***/}
                             <td className='dayForm'>
                                 <label className='form-radio'>
                                     <input
                                         type='radio'
-                                        name='startDayOption'
-                                        value='today'
-                                        checked={this.state.startDayOption === 'today'}
+                                        name='start_day'
+                                        value={this.today}
+                                        checked={this.state.start_day === this.today}
                                         onChange={this.handleChange}
                                         className='form-input-radio'
                                     />
@@ -94,9 +69,9 @@ class SleepForm extends React.Component {
                                 <label className='form-radio'>
                                     <input
                                         type='radio'
-                                        name='startDayOption'
-                                        value='yesterday'
-                                        checked={this.state.startDayOption === 'yesterday'}
+                                        name='start_day'
+                                        value={this.yesterday}
+                                        checked={this.state.start_day === this.yesterday}
                                         onChange={this.handleChange}
                                         className='form-input-radio'
                                     />
@@ -105,9 +80,12 @@ class SleepForm extends React.Component {
                                 <label className='form-radio'>
                                     <input
                                         type='radio'
-                                        name='startDayOption'
-                                        value='other'
-                                        checked={this.state.startDayOption === 'other'}
+                                        name='start_day'
+                                        value=''
+                                        checked={
+                                            (this.state.start_day !== this.today) &&
+                                            (this.state.start_day !== this.yesterday)
+                                        }
                                         onChange={this.handleChange}
                                         className='form-input-radio'
                                     />
@@ -118,11 +96,9 @@ class SleepForm extends React.Component {
                                     required
                                     type='date'
                                     name='start_day'
-                                    placeholder='Start Day'
                                     max={this.today}
                                     value={this.state.start_day}
                                     onChange={this.handleChange}
-                                    disabled={this.state.startDayOption !== 'other'}
                                 />
                             </td>
                             <td>
@@ -135,13 +111,15 @@ class SleepForm extends React.Component {
                                     onChange={this.handleChange}
                                 />
                             </td>
+
+                            {/*** END DAY INPUT ***/}
                             <td className='dayForm'>
                                 <label className='form-radio'>
                                     <input
                                         type='radio'
-                                        name='endDayOption'
-                                        value='today'
-                                        checked={this.state.endDayOption === 'today'}
+                                        name='end_day'
+                                        value={this.today}
+                                        checked={this.state.end_day === this.today}
                                         onChange={this.handleChange}
                                         className='form-input-radio'
                                     />
@@ -150,9 +128,9 @@ class SleepForm extends React.Component {
                                 <label className='form-radio'>
                                     <input
                                         type='radio'
-                                        name='endDayOption'
-                                        value='yesterday'
-                                        checked={this.state.endDayOption === 'yesterday'}
+                                        name='end_day'
+                                        value={this.yesterday}
+                                        checked={this.state.end_day === this.yesterday}
                                         onChange={this.handleChange}
                                         className='form-input-radio'
                                     />
@@ -161,9 +139,12 @@ class SleepForm extends React.Component {
                                 <label className='form-radio'>
                                     <input
                                         type='radio'
-                                        name='endDayOption'
-                                        value='other'
-                                        checked={this.state.endDayOption === 'other'}
+                                        name='end_day'
+                                        value=''
+                                        checked={
+                                            (this.state.end_day !== this.today) &&
+                                            (this.state.end_day !== this.yesterday)
+                                        }
                                         onChange={this.handleChange}
                                         className='form-input-radio'
                                     />
@@ -173,7 +154,6 @@ class SleepForm extends React.Component {
                                     required
                                     type='date'
                                     name='end_day'
-                                    placeholder='End Day'
                                     min={this.state.start_day}
                                     max={this.today}
                                     value={this.state.end_day}
@@ -181,7 +161,7 @@ class SleepForm extends React.Component {
                                 /> 
                             </td>
                             <td>
-                                <input 
+                                <input
                                     required
                                     type='time'
                                     name='end_time'
@@ -189,7 +169,7 @@ class SleepForm extends React.Component {
                                     min={this.state.end_day === this.state.start_day ? this.state.start_time : null}
                                     value={this.state.end_time}
                                     onChange={this.handleChange}
-                                /> 
+                                />
                             </td>
                         </tr>
                     </tbody>
@@ -206,16 +186,78 @@ class SleepForm extends React.Component {
                 />
                 <br /><br />
                 
-                <label><strong>Rating (optional):</strong></label><br />
-                <input 
-                    type='number'
-                    min='1'
-                    max='5'
-                    name='rating'
-                    placeholder='(1-5)'
-                    value={this.state.rating}
-                    onChange={this.handleChange}
-                />
+                {/*** RATING INPUT ***/}
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Rating (optional):</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <label className='form-radio'>
+                                <input
+                                    type='radio'
+                                    name='rating'
+                                    value='1'
+                                    checked={this.state.rating === '1'}
+                                    onChange={this.handleChange}
+                                    className='form-input-radio'
+                                />
+                                1
+                            </label>
+                            <label className='form-radio'>
+                                <input
+                                    type='radio'
+                                    name='rating'
+                                    value='2'
+                                    checked={this.state.rating === '2'}
+                                    onChange={this.handleChange}
+                                    className='form-input-radio'
+                                />
+                                2
+                            </label>
+                            <label className='form-radio'>
+                                <input
+                                    type='radio'
+                                    name='rating'
+                                    value='3'
+                                    checked={this.state.rating === '3'}
+                                    onChange={this.handleChange}
+                                    className='form-input-radio'
+                                />
+                                3
+                            </label>
+                            <label className='form-radio'>
+                                <input
+                                    type='radio'
+                                    name='rating'
+                                    value='4'
+                                    checked={this.state.rating === '5'}
+                                    onChange={this.handleChange}
+                                    className='form-input-radio'
+                                />
+                                4
+                            </label>
+                            <label className='form-radio'>
+                                <input
+                                    type='radio'
+                                    name='rating'
+                                    value='5'
+                                    checked={this.state.rating === '5'}
+                                    onChange={this.handleChange}
+                                    className='form-input-radio'
+                                />
+                                5
+                            </label>
+                        </tr>
+                    </tbody>
+                </table>
                 <br /><br />
                 
                 <input type='submit' value='Add Sleep'/> 

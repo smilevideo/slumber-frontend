@@ -16,6 +16,12 @@ td.dayForm {
 
 table, th, td {
     border: 1px solid rgb(128, 128, 128);
+    /* border-collapse: collapse; */
+    /* not implemented yet because don't know how to make the date input borders equal thickness */
+}
+
+th, td{
+    padding: 10px;
 }
 
 /* no changes atm */
