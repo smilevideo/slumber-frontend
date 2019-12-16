@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createSleep } from '../../actions/userActions';
+import { format } from 'date-fns';
 
 class SleepForm extends React.Component {
     constructor() {
@@ -12,7 +13,8 @@ class SleepForm extends React.Component {
             end_day: '',
             end_time: '',
             note: '',
-            rating: ''
+            rating: '',
+            startDayOption: 'today'
         }
     }
 
@@ -29,18 +31,8 @@ class SleepForm extends React.Component {
     }
 
     render() {
-        //set today's date as formatted string to set max value of sleep's start date
-        const today = new Date();
-        let dd = today.getDate();
-        let mm = today.getMonth() + 1; //January is 0!
-        const yyyy = today.getFullYear();
-        if(dd < 10){
-            dd = '0' + dd
-        } 
-        if(mm < 10){
-            mm = '0' + mm
-        } 
-        this.today = `${yyyy}-${mm}-${dd}`;
+        //set today's date as formatted string
+        this.today = format(new Date(), 'yyyy-MM-dd')
 
         return (<div className='main'>
             <h2 className='header'>New Sleep Entry</h2>
@@ -58,12 +50,42 @@ class SleepForm extends React.Component {
                             <th>End Time (24hr)</th>
                         </tr>
                         <tr>
-                            <td>
-                                {/* possibly want to add radio buttons for today/yesterday */}
-                                {/* <input
-                                    type='radio' 
-                                /> */}
-                                <input 
+                            <td className='dayForm'>
+                                <label className='form-radio'>
+                                    <input
+                                        type='radio'
+                                        name='startDayOption'
+                                        value='today'
+                                        checked={this.state.startDayOption === 'today'}
+                                        onChange={this.handleChange}
+                                        className='form-input-radio'
+                                    />
+                                    Today
+                                </label>
+                                <label className='form-radio'>
+                                    <input
+                                        type='radio'
+                                        name='startDayOption'
+                                        value='yesterday'
+                                        checked={this.state.startDayOption === 'yesterday'}
+                                        onChange={this.handleChange}
+                                        className='form-input-radio'
+                                    />
+                                    Yesterday
+                                </label>
+                                <label className='form-radio'>
+                                    <input
+                                        type='radio'
+                                        name='startDayOption'
+                                        value='other'
+                                        checked={this.state.startDayOption === 'other'}
+                                        onChange={this.handleChange}
+                                        className='form-input-radio'
+                                    />
+                                    Other
+                                </label>
+                                <br />
+                                <input className='form-date'
                                     required
                                     type='date'
                                     name='start_day'
@@ -71,6 +93,7 @@ class SleepForm extends React.Component {
                                     max={this.today}
                                     value={this.state.start_day}
                                     onChange={this.handleChange}
+                                    disabled={this.state.startDayOption !== 'other'}
                                 />
                             </td>
                             <td>

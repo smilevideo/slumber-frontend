@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './css/index.css';
 import './css/NavBar.css';
 import './css/Home.css';
-import './css/Sleep.css';
+import './css/SleepHistory.css';
+import './css/SleepForm.css';
 import App from './App';
 
 import { Provider } from 'react-redux';
