@@ -194,22 +194,33 @@ class SleepForm extends React.Component {
                         <tr>
                             {/* creates an array of 0-4, then turns it into 1-5, then returns the desired JSX for each number */}
                             {[...Array(5).keys()].map(num => num + 1).map(num => {
-                                return (<td>{num}</td>)
+                                return (<td key={num}>{num}</td>)
                             })}
+                            <td>None</td>
                         </tr>
                         <tr>
                             {[...Array(5).keys()].map(num => num + 1).map(num => {
-                                return (<td>
+                                return (<td key={num}>
                                     <input
                                         type='radio'
                                         name='rating'
-                                        value={`${num}`}
+                                        value={`${num}`} 
                                         checked={this.state.rating === `${num}`}
                                         onChange={this.handleChange}
                                         className='form-input-radio'
                                     />
                                 </td>)
                             })}
+                            <td>
+                                <input
+                                    type='radio'
+                                    name='rating'
+                                    value=''
+                                    checked={!this.state.rating}
+                                    onChange={this.handleChange}
+                                    className='form-input-radio'
+                                />
+                            </td>
                         </tr>
                     </tbody>
                 </table>

@@ -23,11 +23,6 @@ td.dayForm {
 
 table.dates-input-table th, table.dates-input-table td {
     border: 1px solid rgb(128, 128, 128);
-    /* border-collapse: collapse; */
-    /* not implemented yet because don't know how to make the date input borders equal thickness */
-}
-
-table.dates-input-table th, table.dates-input-table td {
     padding: 10px;
 }
 
@@ -40,11 +35,6 @@ input[type=date] {
 
 table.rating-input-table th, table.rating-input-table td {
     border: 1px solid rgb(128, 128, 128);
-    /* border-collapse: collapse; */
-    /* not implemented yet because don't know how to make the date input borders equal thickness */
-}
-
-table.rating-input-table td {
     text-align: center;
-    vertical-align: middle;
+    padding: 2px;
 }
