@@ -192,64 +192,24 @@ class SleepForm extends React.Component {
                 <table className='rating-input-table'>
                     <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
+                            {/* creates an array of 0-4, then turns it into 1-5, then returns the desired JSX for each number */}
+                            {[...Array(5).keys()].map(num => num + 1).map(num => {
+                                return (<td>{num}</td>)
+                            })}
                         </tr>
                         <tr>
-                            <td>
-                                <input
-                                    type='radio'
-                                    name='rating'
-                                    value='1'
-                                    checked={this.state.rating === '1'}
-                                    onChange={this.handleChange}
-                                    className='form-input-radio'
-                                />
-                            </td>
-                            <td>
-                                <input
-                                    type='radio'
-                                    name='rating'
-                                    value='2'
-                                    checked={this.state.rating === '2'}
-                                    onChange={this.handleChange}
-                                    className='form-input-radio'
-                                />
-                            </td>
-                            <td>
-                                <input
-                                    type='radio'
-                                    name='rating'
-                                    value='3'
-                                    checked={this.state.rating === '3'}
-                                    onChange={this.handleChange}
-                                    className='form-input-radio'
-                                />
-                            </td>
-                            <td>
-                                <input
-                                    type='radio'
-                                    name='rating'
-                                    value='4'
-                                    checked={this.state.rating === '4'}
-                                    onChange={this.handleChange}
-                                    className='form-input-radio'
-                                />
-                            </td>
-                            <td>
-
-                                <input
-                                    type='radio'
-                                    name='rating'
-                                    value='5'
-                                    checked={this.state.rating === '5'}
-                                    onChange={this.handleChange}
-                                    className='form-input-radio'
-                                />
-                            </td>
+                            {[...Array(5).keys()].map(num => num + 1).map(num => {
+                                return (<td>
+                                    <input
+                                        type='radio'
+                                        name='rating'
+                                        value={`${num}`}
+                                        checked={this.state.rating === `${num}`}
+                                        onChange={this.handleChange}
+                                        className='form-input-radio'
+                                    />
+                                </td>)
+                            })}
                         </tr>
                     </tbody>
                 </table>
