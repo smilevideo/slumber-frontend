@@ -33,7 +33,9 @@ class DreamForm extends React.Component {
 
     render() {
         return (<div className='dream-form'>
-            <h3>New Dream Entry</h3>
+            <h3 className='dream-form-header'>New Dream Entry</h3>
+
+            <hr />
 
             {this.props.creatingDream ? <p>Adding Dream..</p> : null}
             {this.props.createDreamError ? <p>Error, try again.</p> : null}
@@ -49,9 +51,12 @@ class DreamForm extends React.Component {
                     onChange={this.handleChange}
                 /><br /><br />
 
-                <label><strong>Mood:</strong></label><br />
-                <table className='rating-input-table'>
+                
+                <table className='mood-input-table'>
                     <tbody>
+                        <tr>
+                            <td colSpan='7'>Downer {'<--->'} Upper</td>
+                        </tr>
                         <tr>
                             {/* creates an array of 0 to 7, then produces an array of -3 to 3, then returns the desired JSX for each number */}
                             {[...Array(7).keys()].map(num => num - 3).map(num => {
@@ -74,11 +79,12 @@ class DreamForm extends React.Component {
                         </tr>
                     </tbody>
                 </table>
-                <br /><br />
+                <br />
 
-                <input type='submit' value='Submit Dream'/> 
-
-                <button type='button' onClick={this.handleCancel}>Cancel</button>
+                <div className='dream-form-buttons'>
+                    <input type='submit' value='Submit Dream'/> 
+                    <button type='button' onClick={this.handleCancel}>Cancel</button>
+                </div>
             </form>
         </div>)
     }
