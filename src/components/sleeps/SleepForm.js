@@ -192,7 +192,7 @@ class SleepForm extends React.Component {
                 <table className='rating-input-table'>
                     <tbody>
                         <tr>
-                            {/* creates an array of 0-4, then turns it into 1-5, then returns the desired JSX for each number */}
+                            {/* creates an array of 0 to 4, then produces an array of 1 to 5, then returns the desired JSX for each number */}
                             {[...Array(5).keys()].map(num => num + 1).map(num => {
                                 return (<td key={num}>{num}</td>)
                             })}
@@ -204,7 +204,7 @@ class SleepForm extends React.Component {
                                     <input
                                         type='radio'
                                         name='rating'
-                                        value={`${num}`} 
+                                        value={num}
                                         checked={this.state.rating === `${num}`}
                                         onChange={this.handleChange}
                                         className='form-input-radio'

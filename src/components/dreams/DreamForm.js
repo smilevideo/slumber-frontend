@@ -8,7 +8,7 @@ class DreamForm extends React.Component {
 
         this.state = {
             description: '',
-            mood: ''
+            mood: '0'
         }
     }
 
@@ -46,16 +46,31 @@ class DreamForm extends React.Component {
                 /><br /><br />
 
                 <label><strong>Mood:</strong></label><br />
-                <input
-                    required
-                    type='number'
-                    min='-5'
-                    max='5'
-                    name='mood'
-                    placeholder='-5 to 5'
-                    value={this.state.mood}
-                    onChange={this.handleChange}
-                /><br /><br />
+                <table className='rating-input-table'>
+                    <tbody>
+                        <tr>
+                            {/* creates an array of 0 to 7, then produces an array of -3 to 3, then returns the desired JSX for each number */}
+                            {[...Array(7).keys()].map(num => num - 3).map(num => {
+                                return (<td key={num}>{num}</td>)
+                            })}
+                        </tr>
+                        <tr>
+                            {[...Array(7).keys()].map(num => num - 3).map(num => {
+                                return (<td key={num}>
+                                    <input
+                                        type='radio'
+                                        name='mood'
+                                        value={num}
+                                        checked={this.state.mood === `${num}`}
+                                        onChange={this.handleChange}
+                                        className='form-input-radio'
+                                    />
+                                </td>)
+                            })}
+                        </tr>
+                    </tbody>
+                </table>
+                <br /><br />
 
                 <input type='submit' value='Submit Dream'/> 
             </form>
