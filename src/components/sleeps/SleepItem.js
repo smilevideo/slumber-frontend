@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 
 const SleepItem = (props) => {
-    return <li key={props.sleep.id}>
+    return <li>
         <div>
             <Link to={`sleeps/${props.sleep.id}`}>
                 {`${format(props.sleep.startDate, 'eeee, MMMM do yyyy')}, ${props.sleep.start_time} to 

@@ -103,7 +103,7 @@ class SleepHistory extends React.Component {
                     <hr className='sleep-list-begin'/>
                     <h4>List of sleep sessions during this period:</h4>
                     <ol className='sleepList'>
-                        {this.selectedSleeps.map(sleep => <SleepItem sleep={sleep} />)}
+                        {this.selectedSleeps.map(sleep => <SleepItem sleep={sleep} key={sleep.id} />)}
                     </ol>
                 </>
                 :
