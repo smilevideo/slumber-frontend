@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 
 class SleepView extends React.Component {
     handleClick = event => {
-        this.props.addSleep();
+        this.props.addDream();
     }
 
     render() {
@@ -50,7 +50,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    addSleep: () => dispatch({type: 'ADDING_DREAM' })
+    addDream: () => dispatch({type: 'ADDING_DREAM' })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SleepView);

@@ -27,8 +27,12 @@ class DreamForm extends React.Component {
         });
     }
 
+    handleCancel = () => {
+        this.props.cancelAddDream();
+    }
+
     render() {
-        return (<React.Fragment>
+        return (<div className='dream-form'>
             <h3>New Dream Entry</h3>
 
             {this.props.creatingDream ? <p>Adding Dream..</p> : null}
@@ -73,8 +77,10 @@ class DreamForm extends React.Component {
                 <br /><br />
 
                 <input type='submit' value='Submit Dream'/> 
+
+                <button type='button' onClick={this.handleCancel}>Cancel</button>
             </form>
-        </React.Fragment>)
+        </div>)
     }
 };
 
@@ -86,7 +92,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    createDream: dreamParams => dispatch(createDream(dreamParams))
+    createDream: dreamParams => dispatch(createDream(dreamParams)),
+    cancelAddDream: () => dispatch({ type: 'CANCEL_ADD_DREAM' })
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DreamForm);

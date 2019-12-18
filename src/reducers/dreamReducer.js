@@ -12,6 +12,12 @@ export default (state = initialState, action) => {
                 addingDream: true
             }
 
+        case 'CANCEL_ADD_DREAM':
+            return {
+                ...state,
+                addingDream: false
+            }
+
         case 'CREATING_DREAM':
             return {
                 ...state,
