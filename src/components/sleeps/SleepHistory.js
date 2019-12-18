@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import { 
     areIntervalsOverlapping, 
@@ -12,6 +11,7 @@ import {
     subDays
 } from 'date-fns';
 import { minutesToString } from '../../helperFunctions';
+import SleepItem from './SleepItem';
 
 class SleepHistory extends React.Component {
     constructor() {
@@ -103,26 +103,7 @@ class SleepHistory extends React.Component {
                     <hr className='sleep-list-begin'/>
                     <h4>List of sleep sessions during this period:</h4>
                     <ol className='sleepList'>
-                        {this.selectedSleeps.map(sleep => {
-                            return <li key={sleep.id}>
-                                <div>
-                                    <Link to={`sleeps/${sleep.id}`}>
-                                        {`${format(sleep.startDate, 'eeee, MMMM do yyyy')}, ${sleep.start_time} to 
-                                        ${format(sleep.endDate, 'eeee, MMMM do yyyy')}, ${sleep.end_time}:`}
-                                    </Link>
-                                </div>
-                                <div><strong>Sleep duration: </strong>{sleep.duration}</div>
-                                <br />
-                                <div className='sleep-note'><strong>Note(s): </strong><br />{sleep.note ? sleep.note : 'N/A'}</div>
-                                <br />
-                                <div><strong>Rating: </strong>{sleep.rating ? sleep.rating : 'N/A'}</div>
-                                <br />
-                                <div><strong>Dream(s) recorded: </strong>{sleep.dreams.length > 0 ? 'Yes' : 'No'}</div>
-                                <br />
-                                <hr />
-                                <br />
-                            </li>
-                        })}
+                        {this.selectedSleeps.map(sleep => <SleepItem sleep={sleep} />)}
                     </ol>
                 </>
                 :
