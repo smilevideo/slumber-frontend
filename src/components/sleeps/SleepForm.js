@@ -44,7 +44,7 @@ class SleepForm extends React.Component {
             {this.props.createSleepError ? <p>Error, try again.</p> : null}
 
             <form className='sleep-form' onSubmit={this.handleSubmit}>
-                <table>
+                <table className='dates-input-table'>
                     <tbody>
                         <tr>
                             <th>Start Day</th>
@@ -173,7 +173,8 @@ class SleepForm extends React.Component {
                             </td>
                         </tr>
                     </tbody>
-                </table><br />
+                </table>
+                <br />
                 
                 <label><strong>Note (optional):</strong></label><br />
                 <textarea
@@ -187,11 +188,9 @@ class SleepForm extends React.Component {
                 <br /><br />
                 
                 {/*** RATING INPUT ***/}
-                <table>
+                <label><strong>Rating (optional):</strong></label><br />
+                <table className='rating-input-table'>
                     <tbody>
-                        <tr>
-                            <th>Rating (optional):</th>
-                        </tr>
                         <tr>
                             <td>1</td>
                             <td>2</td>
@@ -200,7 +199,7 @@ class SleepForm extends React.Component {
                             <td>5</td>
                         </tr>
                         <tr>
-                            <label className='form-radio'>
+                            <td>
                                 <input
                                     type='radio'
                                     name='rating'
@@ -209,9 +208,8 @@ class SleepForm extends React.Component {
                                     onChange={this.handleChange}
                                     className='form-input-radio'
                                 />
-                                1
-                            </label>
-                            <label className='form-radio'>
+                            </td>
+                            <td>
                                 <input
                                     type='radio'
                                     name='rating'
@@ -220,9 +218,8 @@ class SleepForm extends React.Component {
                                     onChange={this.handleChange}
                                     className='form-input-radio'
                                 />
-                                2
-                            </label>
-                            <label className='form-radio'>
+                            </td>
+                            <td>
                                 <input
                                     type='radio'
                                     name='rating'
@@ -231,20 +228,19 @@ class SleepForm extends React.Component {
                                     onChange={this.handleChange}
                                     className='form-input-radio'
                                 />
-                                3
-                            </label>
-                            <label className='form-radio'>
+                            </td>
+                            <td>
                                 <input
                                     type='radio'
                                     name='rating'
                                     value='4'
-                                    checked={this.state.rating === '5'}
+                                    checked={this.state.rating === '4'}
                                     onChange={this.handleChange}
                                     className='form-input-radio'
                                 />
-                                4
-                            </label>
-                            <label className='form-radio'>
+                            </td>
+                            <td>
+
                                 <input
                                     type='radio'
                                     name='rating'
@@ -253,8 +249,7 @@ class SleepForm extends React.Component {
                                     onChange={this.handleChange}
                                     className='form-input-radio'
                                 />
-                                5
-                            </label>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
