@@ -35,7 +35,7 @@ class DreamForm extends React.Component {
         return (<div className='dream-form'>
             <h3 className='dream-form-header'>New Dream Entry</h3>
 
-            <hr />
+            <hr style={{margin: '0px -5px 10px -5px'}}/>
 
             {this.props.creatingDream ? <p>Adding Dream..</p> : null}
             {this.props.createDreamError ? <p>Error, try again.</p> : null}
