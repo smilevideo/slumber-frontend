@@ -1,0 +1,36 @@
+home page:
+-*chart dropdown to select week
+-*chart showing hours slept over past month
+
+sleep overview:
+-'remove sleep' button
+-*alternative to calendar clicking: user text input to select date range
+
+sleep form:
+
+dream form:
+-separate textarea inputs for thoughts/takeaways
+-emojis corresponding to relative mood levels next to each number
+-form moved to the right side
+
+dream list:
+-when positive mood: smile icon, and vice versa
+
+individual sleep page:
+-when positive mood: smile icon, and vice versa
+-edit sleep
+-remove dream
+-edit dream
+-dream description text should wrap instead of extend the page
+
+navbar:
+-grid to get it to work on mobile
+
+concatenate css files or @import?
+
+EVERYTHING:
+-should have followed mobile-first design, layout breaks easily when zooming in
+-styling
+-don't allow going to pages that you should need to be logged in for
+-timeout on requests
+-maybe fix bug where app crashes if localstorage has a token but the user no longer exists
