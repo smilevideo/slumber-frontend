@@ -20,21 +20,28 @@ class SleepView extends React.Component {
             {typeof(this.sleep) !== 'undefined' ? 
                 <>
                 <h2 className='header'>Sleep from {`${format(this.sleep.startDate, 'eeee, MMMM do yyyy')}, ${this.sleep.start_time} to 
-                            ${format(this.sleep.endDate, 'eeee, MMMM do yyyy')}, ${this.sleep.end_time}:`}</h2>                             
-                <p><strong>Total duration: </strong>{this.sleep.duration}</p>
-                <p>{`Rating: ${this.sleep.rating ? this.sleep.rating : 'N/A'}`}</p>
-                <p><span>Note: </span>{this.sleep.note ? this.sleep.note : 'N/A'}</p>
+                    ${format(this.sleep.endDate, 'eeee, MMMM do yyyy')}, ${this.sleep.end_time}:`}</h2>
+                
+                <div className='sleep-view'>
+                    <div className='sleep-view-sleep-info'>
+                        <p><strong>Total duration: </strong>{this.sleep.duration}</p>
+                        <p>{`Rating: ${this.sleep.rating ? this.sleep.rating : 'N/A'}`}</p>
+                        <p><span>Note: </span>{this.sleep.note ? this.sleep.note : 'N/A'}</p>
+                    </div>
 
-                <h3>Dreams: </h3>
-                {this.props.addingDream ? <DreamForm sleepId={this.sleep.id} /> : <button onClick={this.handleClick}>Add Dream</button>}
-                <ol>
-                    {this.sleep.dreams.map(dream => {
-                        return (<li key={dream.id}>
-                            <p className='dream-description'>{dream.description}</p>
-                            {typeof(dream.mood) === 'number' ? <p>Mood: {dream.mood}</p> : null}
-                        </li>)
-                    })}
-                </ol>
+                    <div className='sleep-view-dream-list'>
+                        <h3>Dreams: </h3>
+                        {this.props.addingDream ? <DreamForm sleepId={this.sleep.id} /> : <button onClick={this.handleClick}>Record Dream</button>}
+                        <ol>
+                            {this.sleep.dreams.map(dream => {
+                                return (<li key={dream.id}>
+                                    <p className='dream-description'>{dream.description}</p>
+                                    {typeof(dream.mood) === 'number' ? <p>Mood: {dream.mood}</p> : null}
+                                </li>)
+                            })}
+                        </ol>
+                    </div>
+                </div>
                 </>
             : null} 
         </div>)

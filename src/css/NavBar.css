@@ -13,6 +13,10 @@ div.navbar {
     order: -1;
 }
 
+.navbar-logo strong {
+    color: rgb(209, 229, 255);
+}
+
 .navbar-flex-filler-loggedin {
     width: 40vw;
     order: 1;

@@ -1,0 +1,14 @@
+/** Sleep View (individual sleep's page) **/
+
+div.sleep-view {
+    display: grid;
+    grid-template: 1fr / 1fr 1fr;
+}
+
+div.sleep-view-sleep-info {
+    grid-column-start: 1;
+}
+
+div.sleep-view-dream-list {
+    grid-column-start: 2;
+}

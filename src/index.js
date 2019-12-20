@@ -6,6 +6,7 @@ import './css/Home.css';
 import './css/SleepHistory.css';
 import './css/SleepForm.css';
 import './css/DreamForm.css';
+import './css/SleepView.css';
 import App from './App';
 
 import { Provider } from 'react-redux';

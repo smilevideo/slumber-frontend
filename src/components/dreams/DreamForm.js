@@ -82,7 +82,7 @@ class DreamForm extends React.Component {
                 <br />
 
                 <div className='dream-form-buttons'>
-                    <input type='submit' value='Submit Dream'/> 
+                    <input type='submit' value='Add Dream'/> 
                     <button type='button' onClick={this.handleCancel}>Cancel</button>
                 </div>
             </form>

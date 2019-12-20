@@ -7,12 +7,11 @@ import { getUser } from './actions/userActions';
 
 import NavBar from './components/NavBar';
 import Home from './components/Home';
-
-import LogOut from './components/LogOut';
-import SleepForm from './components/sleeps/SleepForm';
-
 import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
+import LogOut from './components/LogOut';
+
+import SleepForm from './components/sleeps/SleepForm';
 import SleepHistory from './components/sleeps/SleepHistory';
 import SleepView from './components/sleeps/SleepView';
 import DreamOverview from './components/dreams/DreamOverview.js';
