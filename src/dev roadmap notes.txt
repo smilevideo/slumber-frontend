@@ -26,11 +26,19 @@ individual sleep page:
 navbar:
 -grid to get it to work on mobile
 
-concatenate css files or @import?
-
-EVERYTHING:
+misc/overall notes:
+-concatenate css files or @import?
 -should have followed mobile-first design, layout breaks easily when zooming in
 -styling
 -don't allow going to pages that you should need to be logged in for
 -timeout on requests
 -maybe fix bug where app crashes if localstorage has a token but the user no longer exists
+
+## to-do:
+- Move token from localStorage to an httpOnly cookie
+- Put API url in env variable or something for all action files to access
+- Separate out actions by model (user, sleep, etc.) -each one references getUser from user actions
+
+## bugs:
+- when refreshing while logged in, navbar momentarily shows the logged-out buttons
+- when moving to a different tab while there is an error message, the error message is still there upon return
