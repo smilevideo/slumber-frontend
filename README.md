@@ -3,7 +3,7 @@ React/Redux frontend for Slumber, a sleep log/dream journal.
 
 Uses the date-fns, react-calendar, and recharts packages
 
-## Future changes:
+## Future Changes:
 - Move token from localStorage to an httpOnly cookie
 - Put API url in env variable for all action files to access
 - Separate out actions by model (user, sleep, etc.) -each one references getUser from user actions
