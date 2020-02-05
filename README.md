@@ -3,6 +3,8 @@ React/Redux frontend for Slumber, a sleep log/dream journal.
 
 Uses the date-fns, react-calendar, and recharts packages
 
+Repo for Rails+Postgres backend is here: https://github.com/smilevideo/slumber-backend
+
 ## Future changes:
 - Move token from localStorage to an httpOnly cookie
 - Put API url in env variable or something for all action files to access
