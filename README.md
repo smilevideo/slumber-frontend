@@ -1,6 +1,11 @@
 # slumber-frontend
 React/Redux frontend for Slumber, a sleep log/dream journal.
 
+Demo deployed here: https://afternoon-depths-70876.herokuapp.com/.  
+Seed user with prepopulated example data is:  
+- username: test_user  
+- password: password  
+
 Uses the date-fns, react-calendar, and recharts packages
 
 Repo for Rails+Postgres backend is here: https://github.com/smilevideo/slumber-backend
